@@ -27,4 +27,4 @@ Roles desde el inicio: anotarlos en [[decisiones]] en el checkpoint 3. Descanso 
 - [[03-hipotesis]] — escenarios y tecnologías POSIBLES
 - [[preguntas-apertura]] — qué preguntarle a la fundación
 - Evento: [[notas-fundacion]] · [[restricciones]] · [[decisiones]] · [[bitacora]] · [[aporte-biomedica]] · [[flujos]] · [[hardware]] · [[fuentes]] · [[demo-check]] · [[pitch]]
-- [[recomendaciones-fabian]] · [[lecciones-prueba]] · [[herramientas]]
+- **[[comandos]]** · [[reunion-equipo]] · [[recomendaciones-fabian]] · [[lecciones-prueba]] · [[herramientas]]
