@@ -3,7 +3,7 @@ tags: [evento, empatizar]
 ---
 # Notas de la fundación
 
-Con sus palabras exactas y quién lo dijo.
+Con sus palabras exactas y quién lo dijo. Preguntas en [[preguntas-apertura]]; síntesis con la skill entrevista-empatia. Las restricciones pasan a [[restricciones]].
 
 ## Quiénes son
 - 

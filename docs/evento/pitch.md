@@ -13,7 +13,7 @@ tags: [evento, pitch]
 | 6. Impacto y siguiente paso | 30 s | | 6 |
 | 7. Cierre | 15 s | | 7 |
 
-Regla: los 5 hablan. Plan B de demo: capturas + video.
+Se llena con la skill pitch. Reglas: los 5 hablan; cifras solo de [[fuentes]]; plan B de demo: capturas + video.
 
 ## Guion
 
