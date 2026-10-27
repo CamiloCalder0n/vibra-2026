@@ -5,13 +5,28 @@ tags: [vibra, comandos]
 
 Todo se corre en Warp, dentro de `~/Proyectos/vibra-2026`.
 
-## 0. Antes de empezar (una vez, hoy)
+## 0. Antes de empezar (una vez, hoy) — según el chequeo del 27-oct 10:00
 ```bash
-cd ~/Proyectos/vibra-2026
-bash scripts/chequeo-mac.sh          # versiones y estado de todo
-open -a Docker                       # Docker Desktop debe estar abierto
-claude update                        # Claude Code al día
+# 1) Liberar espacio (había 8,2 GB libres; la meta es 20 GB o más)
+docker system prune -f            # imágenes y contenedores que no se usan
+npm cache clean --force
+rm -rf ~/Library/Caches/*         # cachés de apps (se regeneran solas)
+df -h /                           # revisar cuánto quedó
+
+# 2) Actualizar solo lo pequeño (Docker Desktop NO se actualiza hoy)
+claude update                     # Claude Code (estaba en 2.1.311)
+npm i -g @opencode/cli@latest     # OpenCode 2.1.4 → 2.2.0
+composer self-update              # Composer
+
+# 3) Descargar imágenes de Docker con el wifi de la casa (no depender del de la U)
+open -a Docker
+docker pull php:8.3-cli && docker pull mysql:8.0 && docker pull node:22-alpine
+
+# 4) Volver a revisar
+bash scripts/chequeo-mac.sh
 ```
+Estado OK del chequeo: git, Node 24, PHP 8.4, Composer, Laravel Installer 5.31, Docker 29.8 + Compose v5.6, agy 1.4.6, GitHub CLI (sesión iniciada), Python 3.14, Obsidian 1.14.5, batería 100%, puertos 8000/3306/5432/5173 libres.
+Pendiente: Homebrew no aparece en la terminal (no se necesita para el evento).
 
 ## 1. Abrir el entorno
 ```bash

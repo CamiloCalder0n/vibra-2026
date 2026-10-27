@@ -1,0 +1,33 @@
+Chequeo: 2026-10-27 10:00
+macOS            27.2
+chip             arm64
+git              git version 2.54.0 (Apple Git-157)
+brew             scripts/chequeo-mac.sh: line 5: brew: command not found
+node             v24.15.0
+npm              11.12.1
+php              PHP 8.4.1 (cli) (built: Nov 21 2024 08:58:37) (NTS)
+composer         Composer version 2.8.12 2025-09-19 13:41:59
+laravel          Laravel Installer 5.31.0
+docker           Docker version 29.8.2, build 7fc2dff
+compose          Docker Compose version v5.6.0
+docker-activo    NO (abrir Docker Desktop)
+claude           2.1.311 (Claude Code)
+agy              1.4.6
+opencode         opencode v2.1.4
+gh               gh version 2.93.0 (2026-05-27)
+gh-login         SI
+python3          Python 3.14.4
+obsidian         1.14.5
+warp             SI
+disco-libre      8.2Gi
+bateria          100%
+puertos          8000:libre 3306:libre 5432:libre 5173:libre 
+--- Actualizaciones pendientes (brew) ---
+--- Último npm global ---
+Package             Current   Wanted   Latest  Location                         Depended by
+@openai/codex       0.149.0  0.164.0  0.164.0  node_modules/@openai/codex       global
+@opencode/cli         2.1.4    2.2.0    2.2.0  node_modules/@opencode/cli       global
+@thunderclient/cli  1.27.14    2.1.1    2.1.1  node_modules/@thunderclient/cli  global
+corepack             0.34.6   0.36.0   0.36.0  node_modules/corepack            global
+netlify-cli          26.1.0  27.14.3  27.14.3  node_modules/netlify-cli         global
+npm                 11.12.1   12.2.1   12.2.1  node_modules/npm                 global
