@@ -18,11 +18,12 @@ Si existe el subagente qa-demo, delegarle la revisión del código y el recorrid
 - [ ] Sin wifi: ¿qué se rompe? ¿Hay datos locales de respaldo?
 - [ ] Datos de demo realistas en español (sin "test", sin "lorem", sin datos de personas reales).
 - [ ] Textos y botones que confundan a alguien no técnico.
-- [ ] Hardware (si hay): alimentación, cables de repuesto, firmware cargado; enlace de Wokwi como respaldo.
+- [ ] Tablet: cargada, brillo al máximo, la app abierta en pantalla completa; el Mac como respaldo con Docker local.
+- [ ] Resembrar el día de la demo para que las fechas queden en "hoy".
 - [ ] Plan B: video de 60–90 s de la demo completa, guardado en el computador y en la nube; capturas en las diapositivas.
 - [ ] Logística: cargadores, adaptador HDMI o USB-C, hotspot del celular, letra legible en el proyector.
 - [ ] Prueba con alguien de fuera del equipo sin explicarle nada: ¿entiende qué pasa?
-- [ ] Pitch cronometrado (versión 5 y versión 10 min) y los 5 hablan.
+- [ ] Pitch cronometrado en 3:00 exactos, la demo en 90 s, y los 5 hablan.
 - [ ] Git: todo integrado en `main`, sin ramas pendientes ni conflictos.
 
 ## Salida

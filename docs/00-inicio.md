@@ -5,13 +5,13 @@ tags: [vibra, indice]
 
 **Cliente:** Refugio Yesenia · **Problema:** [[02-problema]] · **Requerimientos:** [[restricciones]] · **Reto y reglas:** [[01-reto-hechos]]
 
-## Dónde vamos (martes 27, 10:00 p. m.)
+## Dónde vamos (martes 27, 11:30 p. m.)
 | # | Fase | Estado | Entregable |
 |---|---|---|---|
 | 1 | Empatizar | ✓ | [[notas-fundacion]] (Gem, 5 roles y 2 rondas) |
 | 2 | Definir | ✓ | [[02-problema]] (problema, pregunta, objetivo) y [[restricciones]] |
 | 3 | Idear | ✓ | Opción a: **app de tablet** ([[decisiones]], [[flujos]]) |
-| 4 | Construir | **Ahora** (tareas en [[flujos]] sección 9) | Demo de punta a punta |
+| 4 | Construir | **Ahora**: tareas 1–4 listas; arreglos de la revisión ([[revision-27oct]]) y luego 5–9 | Demo de punta a punta |
 | 5 | Pulir y probar | Pendiente | Demo estable, plan B, video |
 | 6 | Pitch | Pendiente | 3 min + demo |
 

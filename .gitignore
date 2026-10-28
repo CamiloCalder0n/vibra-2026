@@ -4,3 +4,5 @@ dist/
 *.db
 .DS_Store
 .obsidian/workspace*.json
+.claude/worktrees/
+.revision/

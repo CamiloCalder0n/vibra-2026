@@ -9,7 +9,7 @@ Objetivo: ver de un vistazo quién necesita ayuda hoy.
 
 ```
 +--------+---------------------------------------------------------+
-| Hoy    | Martes 27 de octubre    [Un perro está mal] [Llegó un perro]
+| Hoy    | [día y fecha de hoy]    [Un perro está mal] [Llegó un perro]
 | Medici-| Hoy hay 3 peluditos que la necesitan                    |
 | nas    | +-----------------+ +-----------------+ +--------------+|
 | Mis    | | Nube            | | Rocco           | | Bruno        ||
@@ -17,11 +17,11 @@ Objetivo: ver de un vistazo quién necesita ayuda hoy.
 | Para el| | comiendo poco   | | Falta darla     | | Falta revisar||
 | veteri-| | [Ver a Nube]    | | [Ya se la di]   | | [Ver a Bruno]||
 | nario  | +-----------------+ +-----------------+ +--------------+|
-|        | Los otros 32 están bien                                 |
+|        | Los otros [N] están bien                                |
 +--------+---------------------------------------------------------+
 ```
 - Título: "Hoy hay 3 peluditos que la necesitan" (si es uno: "Hoy hay 1 peludito que la necesita").
-- Pie: "Los otros 32 están bien".
+- Pie: "Los otros [N] están bien" (N calculado: perros en el refugio menos los que la necesitan; en la demo, 31).
 - **Todos bien:** "Hoy todos sus peluditos están bien". Debajo: "Si alguno se ve mal, toque Un perro está mal". Sin tarjetas, solo la carita del logo.
 - **Urgencia:** la tarjeta de Nube va primero y más grande: "Nube lleva 3 días comiendo poco y hoy está decaída. Llame al veterinario." Botón: **Ver a Nube**.
 
@@ -51,14 +51,14 @@ Objetivo: dar cada medicina una sola vez y a tiempo.
 +--------+---------------------------------------------------------+
 | (menú) | Medicinas de hoy                                        |
 |        | Rocco  Cefalexina, 1 pastilla, cada 12 horas            |
-|        |   Mañana   Dada a las 8:02 a. m.                        |
-|        |   Noche    8:00 p. m.              [Ya se la di]        |
+|        |   Tarde    2:00 p. m.              [Ya se la di]        |
+|        |   Noche    2:00 a. m.                                   |
 |        | Canela Gotas para el ojo, 2 veces al día                |
 |        |   Mañana   Dada a las 7:40 a. m.                        |
 +--------+---------------------------------------------------------+
 ```
-- Tras tocar: "Dada a las 8:02 a. m.". El botón desaparece.
-- Si toca otra vez antes de tiempo: "Rocco ya se tomó la cefalexina a las 8:02 a. m. La próxima es a las 8:00 p. m." Botón único: **Entendido**.
+- Tras tocar: "Dada a las [hora real]". El botón desaparece.
+- Si toca otra vez: "Rocco ya se tomó la cefalexina a las [hora]. La próxima es a las 2:00 a. m." Botón único: **Entendido**.
 - Vacío: "Hoy no hay medicinas que dar".
 
 ## 4. Mis perros
@@ -100,25 +100,25 @@ Objetivo: anotar al recién llegado, una pregunta por pantalla.
 3. "¿Es macho o hembra?" **Macho** **Hembra** **No sé**
 4. "¿Cómo llegó?" **Bien** **Flaco** **Herido** **Enfermo**
 5. "¿Tiene vacunas?" **Sí** **No** **No sé**
-6. **Guardar a Bruno**
+6. **Guardar a [nombre]** (en la demo: Lucero)
 
 Barra de pasos: "Paso 2 de 5". Siempre: **Atrás**.
-Confirmación: "Bienvenido, Bruno. Ya está en Mis perros." Si eligió No sé en vacunas: "Pregúntele al veterinario por las vacunas de Bruno".
+Confirmación: "Bienvenido, [nombre]. Ya está en Mis perros." Si eligió No sé en vacunas: "Pregúntele al veterinario por las vacunas de [nombre]". Si toca "Todavía no tiene nombre", se guarda como "Sin nombre".
 
 ## 7. Para el veterinario
 Objetivo: mostrarle al veterinario lo importante en una sola hoja.
 
 ```
 +--------+---------------------------------------------------------+
-| (menú) | Para el veterinario     Del 21 al 27 de octubre         |
+| (menú) | Para el veterinario     [últimos 7 días, calculado]      |
 |        | Nube   3 días comiendo poco, hoy decaída                |
 |        | Rocco  Cefalexina cada 12 h, va en el día 4             |
 |        | Bruno  Recién llegado, flaco, vacunas no se sabe        |
-|        |              [Mandar por WhatsApp] [Mostrar en pantalla]|
+|        |   [Llamar al veterinario] [Mandarle un mensaje] [Mostrar]|
 +--------+---------------------------------------------------------+
 ```
 - Vacío: "Esta semana no hay nada que contarle al veterinario".
-- Confirmación: "Listo, se abrió WhatsApp con el resumen".
+- "Llamar al veterinario" abre el marcador (`tel:`). "Mandarle un mensaje" abre SMS con el resumen (`sms:`). Nada de WhatsApp: ella solo contesta llamadas (U11).
 
 ## Glosario
 
@@ -139,8 +139,8 @@ Objetivo: mostrarle al veterinario lo importante en una sola hoja.
 
 | Perro | Cómo es | Estado |
 |---|---|---|
-| Rocco | Macho, pitbull café, 5 años | Toma cefalexina cada 12 h; dada 8:02 a. m. |
-| Nube | Hembra, criolla blanca, 4 años | 3 días comiendo poco, hoy decaída |
+| Rocco | Macho, pitbull café, 5 años | Toma cefalexina cada 12 h (2:00 p. m. y 2:00 a. m.) |
+| Nube | Hembra, criolla blanca, 4 años | 2 días comiendo poco; en la demo se reporta "decaída" y sale el aviso |
 | Toby | Macho, negro con pecho blanco, 6 años | Bien; no tolera machos |
 | Bruno | Macho, criollo canela, ~2 años | Recién llegado, flaco, vacunas no se sabe |
 | Canela | Hembra, mestiza mona, 8 años | Gotas en el ojo |

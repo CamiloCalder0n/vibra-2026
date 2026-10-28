@@ -4,7 +4,7 @@ mode: subagent
 permission:
   edit: allow
 ---
-Antes de empezar, carga y sigue estas skills: plan-demo, laravel-api, prototipo-hardware.
+Antes de empezar, carga y sigue estas skills: plan-demo y, según la carpeta, laravel-api (backend/) o app-tablet (frontend/).
 Al empezar te dirán qué pieza y qué carpeta te tocan. Lee AGENTS.md completo y `docs/evento/flujos.md`.
 - Usa SOLO el stack y el contrato de AGENTS.md sección 4. Si está vacía, detente y pide que se decida.
 - Trabaja solo en tu carpeta.

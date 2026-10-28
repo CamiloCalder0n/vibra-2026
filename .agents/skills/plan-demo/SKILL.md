@@ -7,7 +7,7 @@ description: "Escribe la especificación de la demo antes de programar en docs/e
 
 ## Regla de oro
 Si el jurado no lo ve en la demo o no cambia la historia del usuario, NO se construye.
-Fuera por defecto: service worker / modo offline avanzado, login y cuentas, despliegue en la nube, arquitectura "escalable", panel de administración, pruebas exhaustivas.
+Fuera por defecto: service worker / modo offline avanzado, login y cuentas, arquitectura "escalable", panel de administración, pruebas exhaustivas. (El despliegue temprano en la nube sí va: regla 11 de AGENTS.md.)
 Excepción: que una restricción de `docs/evento/restricciones.md` lo exija; citarla.
 
 ## Llenar `docs/evento/flujos.md`

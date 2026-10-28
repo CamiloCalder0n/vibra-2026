@@ -49,3 +49,9 @@ tags: [evento, decisiones]
 - Para el día de la demo: `refugio:sembrar --de-nuevo` (local) o `RESEMBRAR=si` en Render. Los ids quedan fijos (Nube = 2, dosis de Rocco de las 8:00 = 7).
 - `foto_url` queda vacía en los seeders: el frontend muestra la foto de ejemplo.
 - Ojo con la historia de la demo: hay 35 perros pero Chispa está adoptada, así que en el refugio quedan 34 (3 necesitan + 31 bien, no 32). Si se quiere "32 bien", se agrega un perro más.
+
+## 2026-10-27 23:30 · Solo la app; arreglos de la revisión
+- Decisión: el proyecto es solo la app de tablet. No se suma pieza física (P2: riesgo aceptado).
+- Historia de la demo ajustada a la presentación del jueves a las 3 p. m.: Rocco con dosis a las 2:00 p. m. y 2:00 a. m.; Nube con 2 días sembrados y el tercero en vivo; perro nuevo en vivo: Lucero; conteos calculados (34 en el refugio, 3 necesitan, 31 bien).
+- "Necesita atención" = reporte ayer u hoy, o medicina pendiente hasta la hora actual, o llegó hace 3 días o menos. "Llame al veterinario" = 3 días seguidos contando hoy.
+- Veterinario por llamada y SMS, no WhatsApp (U11).
