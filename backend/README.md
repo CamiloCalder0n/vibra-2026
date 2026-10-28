@@ -2,6 +2,13 @@
 
 API REST en Laravel 13 + MySQL 8.4 para la app de tablet del refugio. Contrato de endpoints: `AGENTS.md` sección 4 (raíz del repo).
 
+## En línea (Render)
+
+- URL: https://refugio-yesenia-api.onrender.com → prueba: https://refugio-yesenia-api.onrender.com/api/salud responde `{"ok":true}`.
+- Se redespliega solo con cada push a la rama `backend` que cambie algo en `backend/` (`render.yaml` en la raíz).
+- Base: `refugio_yesenia` dentro de la instancia Postgres `facebook-db-prod` (Oregon).
+- El plan gratis se duerme: abrir la URL 5 minutos antes de la demo.
+
 ## Correr en local (Docker)
 
 ```sh
