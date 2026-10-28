@@ -1,54 +1,46 @@
 ---
 tags: [reto, hechos]
-fuente: Reto_Vibra_UNAB_20262.docx (bases oficiales)
+fuente: bases oficiales + apertura del profe (27 oct, audios 11–13) + revisión de las 8 p. m.
 ---
-# Reto Vibra+ UNAB 2026 — Hechos
+# El reto: lo que es seguro
 
-Todo lo de esta nota sale de las bases oficiales. Nada más.
+## El cliente
+- **Refugio Yesenia** (Instagram @refugioyesenia): rescate de perritos, hogar temporal, adopciones. Una casa con luz y agua en Floridablanca, en un barrio pobre y peligroso.
+- Dueña: una señora de casi 70 años, muy bajos recursos, de carácter fuerte y muy de barrio. Solo contesta llamadas (no WhatsApp).
+- El agente del profe (Gem) simula el albergue "Huellitas": 35 perros y 20 gatos, una encargada de 48 años y un equipo de 4. **Sirve para entender los dolores; los datos de la señora real mandan.**
 
-## Formato
-- Presencial, Auditorio de Ingenierías Jesús Alberto Rey Mariño. 48 horas.
-- Máximo 5 equipos de 5 estudiantes de la Facultad de Ingeniería, de al menos 2 programas.
-- Organiza: Ingeniería Biomédica UNAB, en la Semana de la Ingeniería.
-- Premio: incentivo económico en bonos para el equipo ganador.
+## Lo que pidió el profe
+- Dos caminos (escoger uno): mejorar la **gestión del albergue** o mejorar la **vida de un perrito** en particular.
+- Orden: **Problema → Pregunta → Objetivo**. Primero el problema, después la solución.
+- **Prototipo funcionando el jueves.** Penalización grave si los dispositivos fallan.
+- La plata va a salir, pero no hay que centrarse en ella.
+- Pensar en la usuaria real (un grupo propuso un microscopio: inútil para una señora de 70).
+- **8:00 p. m. (revisión): "soluciones de página web no sirven; hay que ir por hardware y soluciones".**
 
-## Temática
-Problemáticas de transformación social: necesidades reales de comunidades, poblaciones o contextos. Soluciones que mejoren la calidad de vida, promuevan la inclusión, fortalezcan el bienestar colectivo o generen impacto positivo.
+## Pitch
+- **3 minutos, sin preguntas**, y después una demo breve. Al grano.
+- Pesa entre 20 % y 30 %. El año pasado el mejor proyecto perdió por el pitch: presenta el mejor del grupo y se ensaya.
+- Jurado probable: la señora y personas de otras facultades (no técnicas). El profe no es jurado.
 
-## Metodología
-Sprint de diseño: ideación, prototipado y presentación. Mentores guían con talleres de design thinking.
-
-## Jurados y mentores
-| | Mentores | Jurados |
+## Rúbrica (foto; dice "Colegio": confirmar si es la nuestra)
+| Criterio | Peso | Sobresaliente |
 |---|---|---|
-| Quiénes | Profesores UNAB (8–12) | Personal de la Fundación (3–5) |
-| Cuándo | 4 momentos, 2 h de disponibilidad | Inauguración (dudas sobre la problemática) y evaluación final |
-| Herramienta | Guías metodológicas | Rúbrica de calificación |
+| Innovación | 40 % | Idea original con un enfoque propio del problema |
+| Impacto | 30 % | Problema sustentado en usuarios reales y beneficio claro |
+| Presentación | 30 % | Claro, ordenado, convincente, dentro del tiempo |
 
-## Cronograma
-| Día | Hora | Actividad |
+## Cronograma que queda
+| Día | Hora | Qué |
 |---|---|---|
-| Mar 27 | 2:00 p. m. | Registro |
-| | 3:00 p. m. | Apertura |
-| | 4:30 p. m. | Evaluación Reto Vibra+ Junior |
-| | 5:30 p. m. | Definición del problema |
-| | 6:00 p. m. | Sprint de creatividad |
-| | 8:00 p. m. | Inicio hackeo intensivo |
-| Mié 28 | 8:00 a. m. | Refrigerio |
-| | 2:00 p. m. | Ponencia 2 |
-| | 2:20 p. m. | Retroalimentación de mentores 2 |
-| | 5:00 p. m. | Refrigerio |
-| Jue 29 | 8:00 a. m. | Ponencia 3 |
-| | 8:20 a. m. | Retroalimentación de mentores 3 |
-| | 10:20 a. m. | Refrigerio |
-| | 2:00 p. m. | Retroalimentación de mentores 4 |
-| | 3:00 p. m. | Presentaciones |
-| | 4:30 p. m. | Entrega de presentaciones |
-| | 5:00 p. m. | Clausura y premiación |
+| Mié 28 | 2:00 p. m. | Ponencia 2 · 2:20 p. m. retroalimentación de mentores 2 |
+| Jue 29 | 8:00 a. m. | Ponencia 3 · 8:20 a. m. retroalimentación 3 |
+| Jue 29 | 2:00 p. m. | Retroalimentación 4 |
+| Jue 29 | 3:00 p. m. | **Presentaciones** · 4:30 p. m. entrega · 5:00 p. m. premiación |
 
-## Lo que las bases NO dicen
-- Qué fundación ni qué problema.
-- La rúbrica (solo que existe).
-- Si se permite traer código o material preparado.
-- Qué materiales o equipos hay disponibles.
-- Formato y duración exacta de la presentación.
+## Logística
+- Laboratorio disponible las 48 h; quedarse de noche solo para trabajar. Colchonetas y cobijas permitidas.
+- Parqueadero hasta las 10 p. m. (carro $26.000, moto $14.000).
+- Premio: 50 % de beca para cada integrante del grupo ganador + bonos (1 M / 500 mil / 200–300 mil).
+- Equipo: Camilo (Sistemas) + Silvia, Natalia, Andrés, Manuel (Biomédica).
+
+Fuentes crudas: `evento/crudo/transcripcion-profe.md` y `evento/crudo/rubrica-foto.jpg`.
