@@ -19,7 +19,7 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "3307:3306"   # para abrir la base con TablePlus o DBeaver
+      - "127.0.0.1:3307:3306"   # solo desde este computador (TablePlus o DBeaver), no desde la red del evento
     volumes:
       - mysql_datos:/var/lib/mysql
     healthcheck:

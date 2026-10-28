@@ -27,6 +27,8 @@ services:
         value: es
       - key: LOG_CHANNEL
         value: stderr
+      - key: PHP_CLI_SERVER_WORKERS
+        value: "4"   # artisan serve atiende varias peticiones a la vez
       - key: RESEMBRAR
         value: "2026-10-29"   # día de la demo: resiembra una vez en el primer arranque de ese día
       - key: DB_CONNECTION
