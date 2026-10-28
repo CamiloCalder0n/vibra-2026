@@ -5,15 +5,24 @@ tags: [vibra, indice]
 
 **Cliente:** Refugio Yesenia · **Problema:** [[02-problema]] · **Requerimientos:** [[restricciones]] · **Reto y reglas:** [[01-reto-hechos]]
 
-## Dónde vamos (martes 27, 11:30 p. m.)
+## Dónde vamos (cierre del martes 27, 11:40 p. m.)
 | # | Fase | Estado | Entregable |
 |---|---|---|---|
 | 1 | Empatizar | ✓ | [[notas-fundacion]] (Gem, 5 roles y 2 rondas) |
 | 2 | Definir | ✓ | [[02-problema]] (problema, pregunta, objetivo) y [[restricciones]] |
 | 3 | Idear | ✓ | Opción a: **app de tablet** ([[decisiones]], [[flujos]]) |
-| 4 | Construir | **Ahora**: tareas 1–4 listas; arreglos de la revisión ([[revision-27oct]]) y luego 5–9 | Demo de punta a punta |
+| 4 | Construir | Tareas 1–4 listas + arreglos de la revisión ([[revision-27oct]]). **Sigue la 5** | Demo de punta a punta |
 | 5 | Pulir y probar | Pendiente | Demo estable, plan B, video |
 | 6 | Pitch | Pendiente | 3 min + demo |
+
+## ▶ Mañana se empieza aquí (miércoles 28)
+1. **Temprano, en Render:** cambiar `RESEMBRAR` a `2026-10-28` (Environment) y redesplegar, para que la demo de la mentoría tenga fechas de hoy. Revisar en Logs: "Sembrado el 2026-10-28". El jueves temprano, lo mismo con `2026-10-29`. En local: `docker compose exec app php artisan refugio:sembrar --de-nuevo`.
+2. **Visita a la señora** (Biomédica) con [[preguntas-apertura]]; **contarle al profe** que la tablet es el dispositivo (Camilo).
+3. **Tarea 5** en Claude Code (rama `backend`): endpoints de Hoy, perros y reportes, con API Resources (fechas con −05:00) y Postman.
+4. **Tarea 6:** medicinas y el 409 con `update ... whereNull('dada_en')`.
+5. **En paralelo, tarea 7:** `claude --worktree frontend` → "usa el subagente constructor; te toca frontend/ con la skill app-tablet".
+6. **Antes de la mentoría (2:20 p. m.):** integrar a `main`, `/demo-check` y "usa el subagente qa-demo".
+7. Biomédica: tareas 10–13 ([[aporte-biomedica]], datos, prueba con la usuaria, [[pitch]] de 3 min).
 
 ## El flujo a seguir
 ### Hoy martes (hasta las 11:30 p. m.)
