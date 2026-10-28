@@ -8,4 +8,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/salud', SaludController::class);
 Route::get('/hoy', HoyController::class);
 
-Route::apiResource('perros', PerroController::class)->only(['index', 'show', 'store']);
+Route::apiResource('perros', PerroController::class)->only(['index', 'show', 'store', 'update']);

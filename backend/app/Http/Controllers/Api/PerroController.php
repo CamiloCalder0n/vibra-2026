@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePerroRequest;
+use App\Http\Requests\UpdatePerroRequest;
 use App\Http\Resources\PerroResource;
 use App\Http\Resources\PerroResumenResource;
 use App\Models\Perro;
@@ -44,6 +45,13 @@ class PerroController extends Controller
         $perro = Perro::create($request->validated());
 
         return $this->fichaConMensaje($perro, "Bienvenido, {$perro->nombre}. Ya está en Mis perros.", 201);
+    }
+
+    public function update(UpdatePerroRequest $request, Perro $perro): JsonResponse
+    {
+        $perro->update($request->validated());
+
+        return $this->fichaConMensaje($perro, "Listo, quedaron guardados los datos de {$perro->nombre}.", 200);
     }
 
     private function ficha(Perro $perro): PerroResource
