@@ -58,6 +58,16 @@ Si una tarea depende de esto: pregunta, o decide lo más simple y anótalo en `d
 | POST `/api/dosis/{id}/dar` | 200 `{"dada_en":"2026-10-29T15:05:00-05:00","mensaje":"Dada a las 3:05 p. m."}` · si ya se dio, **409** `{"mensaje":"Rocco ya se tomó la cefalexina a las 3:05 p. m. La próxima es a las 2:00 a. m.","errores":{"dosis":["ya_dada"]}}` |
 | GET `/api/veterinario/resumen?desde=2026-10-21&hasta=2026-10-27` | `{"revisar":[...],"tratamientos":[...],"recien_llegados":[...]}` |
 
+| POST `/api/demo/reiniciar` | 200: vuelve la historia al comienzo (sin Lucero, Nube sin aviso, dosis #7 pendiente) |
+
+**Formato real = `backend/docs/postman.json`** (manda sobre los ejemplos de esta tabla). Notas para el frontend:
+- Sin envoltura `data`. Campos extra que sí llegan: `perro_id`, `alerta`, `mensaje`, `motivo`, `reportes`, `estado_hoy` (mal | medicina | nuevo | bien | adoptado).
+- POST de perro nuevo manda `vacunas` (si | no | no_se); la ficha devuelve `vacunas_al_llegar` (si | no | no_se) y `vacunas` (lista). "Todavía no tiene nombre" manda `"Sin nombre"`.
+- `ultimos_7_dias` va del más viejo a hoy con códigos (`bien`, `comio_poco`, `decaido`...); el frontend los traduce con los textos de `docs/diseno/contenido.md`.
+- `hora` llega en 24 h ("14:00"); se muestra como "2:00 p. m.".
+- `/api/perros` lista solo los que están en el refugio (34).
+- Rocco aparece en Hoy desde su hora (2:00 p. m.); antes de eso Hoy da 2 necesitan y 32 bien.
+
 Errores siempre: `{"mensaje":"...","errores":{...}}` con 404, 409, 422 o 500.
 
 ## 5. Reglas del sprint

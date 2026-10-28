@@ -32,7 +32,7 @@ La primera vez, genere la llave: `docker compose exec app php artisan key:genera
 
 ## Endpoints
 
-Contrato y ejemplos: `AGENTS.md` sección 4. Colección de Postman con un ejemplo real por endpoint: `backend/docs/postman.json` (variable `base_url`).
+Contrato y ejemplos: `AGENTS.md` sección 4. Colección de Postman con un ejemplo real por endpoint: `backend/docs/postman.json` (variables `base_url` y `render_url`; para probar en línea ponga `base_url` = `{{render_url}}`).
 
 | Método y ruta | Pantalla |
 |---|---|
@@ -46,7 +46,8 @@ Contrato y ejemplos: `AGENTS.md` sección 4. Colección de Postman con un ejempl
 | DELETE `/api/reportes/{id}` | Me equivoqué, borrar → 204 |
 | GET `/api/medicinas/hoy` | Medicinas (todas las dosis de hoy, dadas y por dar) |
 | POST `/api/dosis/{id}/dar` | Ya se la di → 200 · si ya se dio, 409 `ya_dada` con la hora y la próxima |
-| POST `/api/demo/reiniciar` | Botón de reiniciar la demo (`refugio:sembrar --de-nuevo`) |
+| GET `/api/veterinario/resumen?desde=AAAA-MM-DD&hasta=AAAA-MM-DD` | Para el veterinario (sin fechas: de hace 6 días a hoy) |
+| POST `/api/demo/reiniciar` | Botón de reiniciar la demo (`refugio:sembrar --de-nuevo`); máximo 3 por minuto (429) |
 
 Las reglas de "necesita atención" y "3 días seguidos" se calculan en PHP (`app/Services/EstadoDeHoy.php`) con la hora de Bogotá. Una medicina cuenta como pendiente solo cuando ya llegó su hora: por la mañana Rocco no sale en Hoy; a las 3:00 p. m. sí.
 

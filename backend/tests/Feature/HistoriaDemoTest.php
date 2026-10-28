@@ -149,6 +149,47 @@ class HistoriaDemoTest extends TestCase
             ->assertJsonPath('bien', 31);
     }
 
+    public function test_resumen_para_el_veterinario_de_la_semana(): void
+    {
+        $this->getJson('/api/veterinario/resumen')
+            ->assertOk()
+            ->assertJsonPath('desde', '2026-10-23')
+            ->assertJsonPath('hasta', '2026-10-29')
+            ->assertJsonPath('revisar.0', ['id' => 2, 'nombre' => 'Nube', 'dias_con_reporte' => 2, 'sintomas' => ['comio_poco'], 'alerta' => false])
+            ->assertJsonCount(8, 'revisar')
+            ->assertJsonPath('tratamientos.*.perro', ['Canela', 'Pirata', 'Rocco'])
+            ->assertJsonPath('tratamientos.2.dosis_dadas', 6)
+            ->assertJsonPath('tratamientos.2.dosis_total', 7)
+            ->assertJsonPath('recien_llegados.*.nombre', ['Bruno']);
+
+        $this->postJson('/api/perros/2/reportes', ['sintomas' => ['decaido']])->assertCreated();
+
+        $this->getJson('/api/veterinario/resumen')
+            ->assertJsonPath('revisar.0', ['id' => 2, 'nombre' => 'Nube', 'dias_con_reporte' => 3, 'sintomas' => ['comio_poco', 'decaido'], 'alerta' => true]);
+
+        $this->getJson('/api/veterinario/resumen?desde=2026-10-28&hasta=2026-10-29')
+            ->assertJsonPath('revisar.*.nombre', ['Nube'])
+            ->assertJsonPath('recien_llegados', []);
+
+        $this->getJson('/api/veterinario/resumen?desde=2026-10-29&hasta=2026-10-20')
+            ->assertUnprocessable()
+            ->assertJsonPath('errores.hasta.0', 'La fecha hasta no puede ser antes de la fecha desde.');
+    }
+
+    public function test_reiniciar_la_demo_tiene_limite_de_3_por_minuto(): void
+    {
+        foreach (range(1, 3) as $vez) {
+            $this->postJson('/api/demo/reiniciar')->assertOk();
+        }
+
+        $this->postJson('/api/demo/reiniciar')
+            ->assertTooManyRequests()
+            ->assertJsonPath('mensaje', 'Demasiados intentos seguidos. Espere un minuto y vuelva a intentar.');
+
+        $this->travel(61)->seconds();
+        $this->postJson('/api/demo/reiniciar')->assertOk();
+    }
+
     public function test_errores_con_el_formato_del_contrato(): void
     {
         $this->postJson('/api/perros', ['nombre' => ''])->assertUnprocessable()->assertJsonStructure(['mensaje', 'errores' => ['nombre', 'sexo', 'como_llego', 'vacunas']]);
