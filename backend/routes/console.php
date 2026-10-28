@@ -22,9 +22,14 @@ Artisan::command('refugio:sembrar {--de-nuevo} {--fecha=}', function () {
     }
 
     $sembradoEl = DB::table('ajustes')->where('clave', 'sembrado_el')->value('valor');
-    $deNuevo = $this->option('de-nuevo') || ($fecha === $hoy && $sembradoEl !== $hoy);
+    $hayPerros = DB::table('perros')->exists();
 
-    if (! $deNuevo && DB::table('perros')->exists()) {
+    // Sin fecha de siembra, los perros vienen de una versión anterior de los seeders: se siembran de nuevo.
+    $deNuevo = $this->option('de-nuevo')
+        || ($fecha === $hoy && $sembradoEl !== $hoy)
+        || ($hayPerros && $sembradoEl === null);
+
+    if (! $deNuevo && $hayPerros) {
         $this->info("Ya hay perros en la base (sembrados el {$sembradoEl}); no se siembra de nuevo.");
 
         return;

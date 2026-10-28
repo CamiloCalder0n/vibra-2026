@@ -64,3 +64,4 @@ tags: [evento, decisiones]
 ## 2026-10-27 23:35 · Fechas (revisión, punto 3)
 - Trait `FechasDeBogota` en los 5 modelos: fechas con hora en ISO con −05:00; fechas sin hora con cast `date:Y-m-d`. `reportes.creado_en` pasa a `dateTime` con migración nueva (la original ya corrió en Render).
 - Para la tarea 5: responder siempre serializando modelos o API Resources; un Carbon suelto en `response()->json()` sale en UTC. "Hoy" con `today()`/`now()` de PHP, nunca funciones de fecha de la base.
+- (2026-10-27 23:24) Agregado: si hay perros pero no hay `sembrado_el`, vienen de los seeders anteriores y se resiembra. Así Render toma la historia nueva en el primer arranque después del push, sin esperar al 29.
