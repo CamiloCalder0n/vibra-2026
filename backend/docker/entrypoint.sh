@@ -6,6 +6,7 @@ rm -f bootstrap/cache/packages.php bootstrap/cache/services.php
 php artisan package:discover
 php artisan config:clear
 php artisan migrate --force
-php artisan refugio:sembrar
+# RESEMBRAR=AAAA-MM-DD (render.yaml): ese día, en el primer arranque, borra y siembra con las fechas de hoy.
+php artisan refugio:sembrar --fecha="${RESEMBRAR:-}"
 
 exec php artisan serve --host=0.0.0.0 --port="${PORT:-8000}"

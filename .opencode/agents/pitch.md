@@ -1,5 +1,5 @@
 ---
-description: Escribe y ajusta el guion del pitch de máximo 5 minutos y las respuestas a preguntas difíciles del jurado de la fundación.
+description: Escribe y ajusta el guion del pitch de 3 minutos sin preguntas (más la demo breve) y las respuestas a preguntas difíciles del jurado de la fundación.
 mode: subagent
 permission:
   edit: allow

@@ -40,3 +40,28 @@ tags: [evento, decisiones]
 - Decisión (Camilo): Render solo da una base gratis por workspace y ya está facebook-db-prod (Oregon). La API usa una base nueva `refugio_yesenia` dentro de esa instancia; `render.yaml` ya no crea base y `DB_URL` se pega a mano.
 - Arranque: `migrate --force` siempre; `refugio:sembrar` corre los seeders solo si `perros` está vacía. Reemplaza lo de "seeders repetibles" de la entrada anterior.
 - Riesgos: comparte espacio (1 GB) y fecha de vencimiento con facebook-db-prod; si esa instancia vence o se borra, se cae la demo en línea (plan B: Docker local).
+
+## 2026-10-27 23:04 · Base de datos y seeders (tarea 4)
+- Listas fijas (sexo, como_llego, vacunas, estado, nombre de vacuna) como `string` validado con constantes del modelo, no `enum` (en Postgres es un check difícil de cambiar). `sintomas` y `horas` en columnas `json`.
+- Relaciones con otro nombre porque chocan con columnas del contrato: `Perro::registroVacunas()` (columna `vacunas`) y `Tratamiento::tomas()` (columna `dosis`).
+- `perros.vacunas` = lo que se sabía al llegar; la tabla `vacunas` = el registro actual. Bruno (no_se) no tiene filas.
+- Seeders fijos (sin Faker), fechas relativas al día de siembra. Las dosis de hoy quedan pendientes (Rocco 8:00 y 20:00, Canela 7:00 y 19:00); las de días anteriores, dadas.
+- Para el día de la demo: `refugio:sembrar --de-nuevo` (local) o `RESEMBRAR=si` en Render. Los ids quedan fijos (Nube = 2, dosis de Rocco de las 8:00 = 7).
+- `foto_url` queda vacía en los seeders: el frontend muestra la foto de ejemplo.
+- Ojo con la historia de la demo: hay 35 perros pero Chispa está adoptada, así que en el refugio quedan 34 (3 necesitan + 31 bien, no 32). Si se quiere "32 bien", se agrega un perro más.
+
+## 2026-10-27 23:30 · Solo la app; arreglos de la revisión
+- Decisión: el proyecto es solo la app de tablet. No se suma pieza física (P2: riesgo aceptado).
+- Historia de la demo ajustada a la presentación del jueves a las 3 p. m.: Rocco con dosis a las 2:00 p. m. y 2:00 a. m.; Nube con 2 días sembrados y el tercero en vivo; perro nuevo en vivo: Lucero; conteos calculados (34 en el refugio, 3 necesitan, 31 bien).
+- "Necesita atención" = reporte ayer u hoy, o medicina pendiente hasta la hora actual, o llegó hace 3 días o menos. "Llame al veterinario" = 3 días seguidos contando hoy.
+- Veterinario por llamada y SMS, no WhatsApp (U11).
+
+## 2026-10-27 23:25 · Resiembra por fecha (revisión, punto 1)
+- `RESEMBRAR=2026-10-29` en `render.yaml` reemplaza `RESEMBRAR=si`. La fecha sembrada queda en la tabla `ajustes` (clave `sembrado_el`).
+- Regla: resiembra solo si hoy es la fecha de RESEMBRAR y lo sembrado no es de hoy. Comparar solo con la fecha guardada no sirve: o resiembra en cada arranque del día anterior o deja los datos del día anterior.
+- El truncate va fuera de la transacción (en MySQL la cerraría); la siembra y el marcador van dentro de `DB::transaction`.
+
+## 2026-10-27 23:35 · Fechas (revisión, punto 3)
+- Trait `FechasDeBogota` en los 5 modelos: fechas con hora en ISO con −05:00; fechas sin hora con cast `date:Y-m-d`. `reportes.creado_en` pasa a `dateTime` con migración nueva (la original ya corrió en Render).
+- Para la tarea 5: responder siempre serializando modelos o API Resources; un Carbon suelto en `response()->json()` sale en UTC. "Hoy" con `today()`/`now()` de PHP, nunca funciones de fecha de la base.
+- (2026-10-27 23:24) Agregado: si hay perros pero no hay `sembrado_el`, vienen de los seeders anteriores y se resiembra. Así Render toma la historia nueva en el primer arranque después del push, sin esperar al 29.

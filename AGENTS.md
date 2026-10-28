@@ -28,7 +28,7 @@ Si una tarea depende de esto: pregunta, o decide lo más simple y anótalo en `d
 - Qué aporta Biomédica: seguridad en la administración de medicamentos (los "5 correctos" y el bloqueo de la doble dosis), signos de alarma y regla de 3 días seguidos, y prueba con usuaria (SUS).
 - Tipo de solución: app para tablet Android de 10" en horizontal (PWA) + API.
 - Stack: Laravel MVC como API REST + MySQL en Docker, desplegado en Render. Frontend en `frontend/` consumiendo la API. Sin login (un solo perfil).
-- Qué se simula: la semana anterior (seeders), la voz (navegador), WhatsApp (enlace wa.me), las fotos.
+- Qué se simula: la semana anterior (seeders con fechas relativas a hoy), la voz (navegador), las fotos. Llamar al veterinario abre el marcador (`tel:`) y el mensaje abre SMS (`sms:`).
 - Carpetas: `backend/` (Laravel) · `frontend/` (app) · `docs/`.
 
 ### Contrato de datos
@@ -37,13 +37,17 @@ Si una tarea depende de esto: pregunta, o decide lo más simple y anótalo en `d
 - `tratamientos`: id, perro_id, medicamento, dosis (texto), horas (lista "08:00", "20:00"), desde, hasta.
 - `dosis`: id, tratamiento_id, programada_para (fecha y hora), dada_en (nula hasta darla).
 - `vacunas`: id, perro_id, nombre (moquillo|parvovirus|rabia), aplicada_el (nula = falta).
-- Reglas: un perro sin reporte hoy está "bien". Tres días seguidos con reporte = alerta "Llame al veterinario". Una dosis ya dada no se puede volver a dar (409).
+- Reglas (todas calculadas en PHP con la hora de Bogotá, nunca con funciones de fecha de la base):
+  - "Necesita atención" = reporte ayer u hoy, o medicina pendiente hoy hasta la hora actual, o llegó hace 3 días o menos. Todos los demás perros en el refugio están "bien". Los conteos se calculan; ningún número va fijo.
+  - "Llame al veterinario" = 3 días seguidos con reporte, contando hoy (días distintos).
+  - Una dosis ya dada no se puede volver a dar: 409.
+  - Fechas en el JSON: con hora en ISO con −05:00; sin hora como AAAA-MM-DD.
 
 ### Endpoints (JSON de ejemplo)
 | Método y ruta | Para qué |
 |---|---|
 | GET `/api/salud` | `{"ok":true}` |
-| GET `/api/hoy` | `{"fecha":"2026-10-28","necesitan":[{"id":2,"nombre":"Nube","motivo":"Lleva 3 días comiendo poco y hoy está decaída","alerta":true}],"medicinas_pendientes":[{"dosis_id":41,"perro":"Rocco","medicamento":"Cefalexina","hora":"08:00"}],"bien":32}` |
+| GET `/api/hoy` | `{"fecha":"2026-10-28","necesitan":[{"id":2,"nombre":"Nube","motivo":"Lleva 2 días comiendo poco","alerta":false}],"medicinas_pendientes":[{"dosis_id":7,"perro":"Rocco","medicamento":"Cefalexina","hora":"14:00"}],"en_refugio":34,"bien":31}` |
 | GET `/api/perros?filtro=mal\|medicina\|nuevos` | `[{"id":1,"nombre":"Rocco","foto_url":"...","estado_hoy":"medicina"}]` |
 | GET `/api/perros/{id}` | ficha: `{"id":2,"nombre":"Nube","descripcion":"Hembra, criolla blanca, 4 años","cuidados":"Comida blanda","ultimos_7_dias":["bien","bien","bien","comio_poco","comio_poco","comio_poco","decaido"],"alerta":"Nube lleva 3 días seguidos mal. Llame al veterinario.","vacunas":[{"nombre":"moquillo","aplicada_el":null}],"tratamientos":[]}` |
 | POST `/api/perros` | perro nuevo (Form Request `StorePerroRequest`) → 201 con el perro |
@@ -51,7 +55,7 @@ Si una tarea depende de esto: pregunta, o decide lo más simple y anótalo en `d
 | POST `/api/perros/{id}/reportes` | `{"sintomas":["comio_poco","decaido"]}` → 201 `{"id":88,"mensaje":"Listo, quedó guardado lo de Nube"}` |
 | DELETE `/api/reportes/{id}` | deshacer → 204 |
 | GET `/api/medicinas/hoy` | `[{"dosis_id":41,"perro":"Rocco","medicamento":"Cefalexina","dosis":"1 pastilla","hora":"08:00","dada_en":null}]` |
-| POST `/api/dosis/{id}/dar` | 200 `{"dada_en":"2026-10-28T08:02:00-05:00","mensaje":"Dada a las 8:02 a. m."}` · si ya se dio, **409** `{"mensaje":"Rocco ya se tomó la cefalexina a las 8:02 a. m. La próxima es a las 8:00 p. m.","errores":{"dosis":["ya_dada"]}}` |
+| POST `/api/dosis/{id}/dar` | 200 `{"dada_en":"2026-10-29T15:05:00-05:00","mensaje":"Dada a las 3:05 p. m."}` · si ya se dio, **409** `{"mensaje":"Rocco ya se tomó la cefalexina a las 3:05 p. m. La próxima es a las 2:00 a. m.","errores":{"dosis":["ya_dada"]}}` |
 | GET `/api/veterinario/resumen?desde=2026-10-21&hasta=2026-10-27` | `{"revisar":[...],"tratamientos":[...],"recien_llegados":[...]}` |
 
 Errores siempre: `{"mensaje":"...","errores":{...}}` con 404, 409, 422 o 500.
@@ -59,7 +63,7 @@ Errores siempre: `{"mensaje":"...","errores":{...}}` con 404, 409, 422 o 500.
 ## 5. Reglas del sprint
 1. Un solo flujo de punta a punta primero. Cero extras antes.
 2. Si el jurado no lo ve y no ayuda a la demo, no se hace (ej.: service worker, arquitectura invisible). Login solo si la demo necesita usuarios o roles, y entonces con Sanctum, sin reinventar.
-3. Por indicación del profe (27 oct 8:20 p. m.): la solución debe ser de HARDWARE; una página web sola no sirve. Pocos componentes, probados temprano, con plan B en Wokwi y video, porque si falla en la demo hay penalización grave.
+3. Solo la app de tablet (decisión del equipo, 27 oct 11:15 p. m.). El profe pidió hardware (P2): riesgo aceptado, se le explica el miércoles temprano. Nada de hardware en este proyecto; si falla la demo hay penalización grave, así que siempre respaldo local en Docker y video.
 4. Diseño por excepción: el usuario solo marca lo que cambió. Nadie llena formularios largos.
 5. Todo en español y sin jerga. Datos ficticios; nunca datos reales de personas.
 6. Ninguna cifra, precio o cita entra a docs o al pitch sin fila VERIFICADA o PARCIAL en `docs/evento/fuentes.md` (skill verificar-cifras) y revisión de una persona.
@@ -88,7 +92,8 @@ Errores siempre: `{"mensaje":"...","errores":{...}}` con 404, 409, 422 o 500.
 | aporte-biomedica | Propuesta de valor, prueba con usuarios | `docs/evento/aporte-biomedica.md` |
 | plan-demo | Antes de construir; ante funciones nuevas | `docs/evento/flujos.md` |
 | laravel-api | Backend, API, base de datos, Docker, despliegue, README, Postman | `backend/` |
-| prototipo-hardware | Sensores, Arduino, ESP32, Wokwi | `docs/evento/hardware.md`, `firmware/` |
+| app-tablet | Pantallas de la app de tablet (frontend) | `frontend/` |
+| prototipo-hardware | Sin uso (solo app) | — |
 | verificar-cifras | Cualquier número, precio o cita | `docs/evento/fuentes.md` |
 | pitch | Guion, diapositivas, ensayo | `docs/evento/pitch.md` |
 | checkpoint (`/checkpoint N`, solo manual) | Al cerrar cada checkpoint y antes de mentorías | `docs/evento/bitacora.md` |
