@@ -1,0 +1,818 @@
+{
+  "info": {
+    "name": "API del Refugio Yesenia",
+    "description": "Contrato: AGENTS.md sección 4. Errores siempre {\"mensaje\",\"errores\"} con 404, 409, 422 o 500. Ejemplos generados con los datos sembrados, a las 3:00 p. m. del día (la dosis se da a las 3:05 p. m.). En línea: cambie base_url a https://refugio-yesenia-api.onrender.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000"
+    }
+  ],
+  "item": [
+    {
+      "name": "GET /api/salud · Salud",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/salud",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "salud"
+          ]
+        },
+        "description": "Para saber si la API está en línea."
+      },
+      "response": [
+        {
+          "name": "200 · ejemplo",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/salud",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "salud"
+              ]
+            },
+            "description": "Para saber si la API está en línea."
+          },
+          "code": 200,
+          "status": "OK",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"ok\": true\n}"
+        }
+      ]
+    },
+    {
+      "name": "GET /api/hoy · Hoy",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/hoy",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "hoy"
+          ]
+        },
+        "description": "Pantalla Hoy. \"Necesita atención\" = reporte ayer u hoy, medicina pendiente hasta la hora actual o llegó hace 3 días o menos. Ejemplo a las 3:00 p. m."
+      },
+      "response": [
+        {
+          "name": "200 · ejemplo",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/hoy",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "hoy"
+              ]
+            },
+            "description": "Pantalla Hoy. \"Necesita atención\" = reporte ayer u hoy, medicina pendiente hasta la hora actual o llegó hace 3 días o menos. Ejemplo a las 3:00 p. m."
+          },
+          "code": 200,
+          "status": "OK",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"fecha\": \"2026-10-28\",\n  \"necesitan\": [\n    {\n      \"id\": 2,\n      \"nombre\": \"Nube\",\n      \"motivo\": \"Lleva 2 días comiendo poco\",\n      \"alerta\": false\n    },\n    {\n      \"id\": 1,\n      \"nombre\": \"Rocco\",\n      \"motivo\": \"Falta darle cefalexina de las 2:00 p. m.\",\n      \"alerta\": false\n    },\n    {\n      \"id\": 4,\n      \"nombre\": \"Bruno\",\n      \"motivo\": \"Llegó hace 2 días: que lo revise el veterinario\",\n      \"alerta\": false\n    }\n  ],\n  \"medicinas_pendientes\": [\n    {\n      \"dosis_id\": 7,\n      \"perro\": \"Rocco\",\n      \"medicamento\": \"Cefalexina\",\n      \"hora\": \"14:00\"\n    }\n  ],\n  \"en_refugio\": 34,\n  \"bien\": 31\n}"
+        }
+      ]
+    },
+    {
+      "name": "GET /api/perros · Mis perros (filtro=medicina)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/perros?filtro=medicina",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "perros"
+          ],
+          "query": [
+            {
+              "key": "filtro",
+              "value": "medicina"
+            }
+          ]
+        },
+        "description": "Perros en el refugio. filtro opcional: mal | medicina | nuevos. Sin filtro devuelve los 34."
+      },
+      "response": [
+        {
+          "name": "200 · ejemplo",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/perros?filtro=medicina",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "perros"
+              ],
+              "query": [
+                {
+                  "key": "filtro",
+                  "value": "medicina"
+                }
+              ]
+            },
+            "description": "Perros en el refugio. filtro opcional: mal | medicina | nuevos. Sin filtro devuelve los 34."
+          },
+          "code": 200,
+          "status": "OK",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "_postman_previewlanguage": "json",
+          "body": "[\n  {\n    \"id\": 1,\n    \"nombre\": \"Rocco\",\n    \"foto_url\": null,\n    \"estado_hoy\": \"medicina\"\n  }\n]"
+        }
+      ]
+    },
+    {
+      "name": "GET /api/perros/2 · Ficha de Nube",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/perros/2",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "perros",
+            "2"
+          ]
+        },
+        "description": "Ficha: últimos 7 días, aviso de 3 días seguidos, vacunas, tratamientos en curso y reportes recientes (para borrar)."
+      },
+      "response": [
+        {
+          "name": "200 · ejemplo",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/perros/2",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "perros",
+                "2"
+              ]
+            },
+            "description": "Ficha: últimos 7 días, aviso de 3 días seguidos, vacunas, tratamientos en curso y reportes recientes (para borrar)."
+          },
+          "code": 200,
+          "status": "OK",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"id\": 2,\n  \"nombre\": \"Nube\",\n  \"sexo\": \"hembra\",\n  \"descripcion\": \"Hembra, criolla blanca, 4 años\",\n  \"edad_aprox\": \"4 años\",\n  \"foto_url\": null,\n  \"como_llego\": \"bien\",\n  \"vacunas_al_llegar\": \"si\",\n  \"cuidados\": \"Comida blanda\",\n  \"llego_el\": \"2024-11-27\",\n  \"estado\": \"en_refugio\",\n  \"estado_hoy\": \"mal\",\n  \"motivo\": \"Lleva 2 días comiendo poco\",\n  \"ultimos_7_dias\": [\n    \"bien\",\n    \"bien\",\n    \"bien\",\n    \"bien\",\n    \"comio_poco\",\n    \"comio_poco\",\n    \"bien\"\n  ],\n  \"alerta\": null,\n  \"vacunas\": [\n    {\n      \"nombre\": \"moquillo\",\n      \"aplicada_el\": null\n    },\n    {\n      \"nombre\": \"parvovirus\",\n      \"aplicada_el\": \"2026-04-28\"\n    },\n    {\n      \"nombre\": \"rabia\",\n      \"aplicada_el\": \"2026-04-28\"\n    }\n  ],\n  \"tratamientos\": [],\n  \"reportes\": [\n    {\n      \"id\": 2,\n      \"sintomas\": [\n        \"comio_poco\"\n      ],\n      \"creado_en\": \"2026-10-27T08:20:00-05:00\"\n    },\n    {\n      \"id\": 1,\n      \"sintomas\": [\n        \"comio_poco\"\n      ],\n      \"creado_en\": \"2026-10-26T07:50:00-05:00\"\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "POST /api/perros · Llegó un perro (Lucero)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/perros",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "perros"
+          ]
+        },
+        "description": "StorePerroRequest. llego_el por defecto hoy. 201 con la ficha y el mensaje.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Lucero\",\n  \"sexo\": \"hembra\",\n  \"como_llego\": \"flaco\",\n  \"vacunas\": \"no_se\",\n  \"descripcion\": \"Hembra, criolla amarilla, unos 3 años\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "name": "201 · ejemplo",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/perros",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "perros"
+              ]
+            },
+            "description": "StorePerroRequest. llego_el por defecto hoy. 201 con la ficha y el mensaje.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Lucero\",\n  \"sexo\": \"hembra\",\n  \"como_llego\": \"flaco\",\n  \"vacunas\": \"no_se\",\n  \"descripcion\": \"Hembra, criolla amarilla, unos 3 años\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "code": 201,
+          "status": "Created",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"id\": 36,\n  \"nombre\": \"Lucero\",\n  \"sexo\": \"hembra\",\n  \"descripcion\": \"Hembra, criolla amarilla, unos 3 años\",\n  \"edad_aprox\": null,\n  \"foto_url\": null,\n  \"como_llego\": \"flaco\",\n  \"vacunas_al_llegar\": \"no_se\",\n  \"cuidados\": null,\n  \"llego_el\": \"2026-10-28\",\n  \"estado\": \"en_refugio\",\n  \"estado_hoy\": \"nuevo\",\n  \"motivo\": \"Llegó hoy: que la revise el veterinario\",\n  \"ultimos_7_dias\": [\n    \"bien\",\n    \"bien\",\n    \"bien\",\n    \"bien\",\n    \"bien\",\n    \"bien\",\n    \"bien\"\n  ],\n  \"alerta\": null,\n  \"vacunas\": [],\n  \"tratamientos\": [],\n  \"reportes\": [],\n  \"mensaje\": \"Bienvenido, Lucero. Ya está en Mis perros.\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "PATCH /api/perros/3 · Cambiar datos de Toby",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/perros/3",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "perros",
+            "3"
+          ]
+        },
+        "description": "UpdatePerroRequest: solo se valida lo que llega. estado: en_refugio | adoptado.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"cuidados\": \"No se la lleva bien con otros machos. Póngalo con hembras. Come aparte.\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "name": "200 · ejemplo",
+          "originalRequest": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/perros/3",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "perros",
+                "3"
+              ]
+            },
+            "description": "UpdatePerroRequest: solo se valida lo que llega. estado: en_refugio | adoptado.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cuidados\": \"No se la lleva bien con otros machos. Póngalo con hembras. Come aparte.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "code": 200,
+          "status": "OK",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"id\": 3,\n  \"nombre\": \"Toby\",\n  \"sexo\": \"macho\",\n  \"descripcion\": \"Macho, negro con pecho blanco, 6 años\",\n  \"edad_aprox\": \"6 años\",\n  \"foto_url\": null,\n  \"como_llego\": \"flaco\",\n  \"vacunas_al_llegar\": \"si\",\n  \"cuidados\": \"No se la lleva bien con otros machos. Póngalo con hembras. Come aparte.\",\n  \"llego_el\": \"2024-05-11\",\n  \"estado\": \"en_refugio\",\n  \"estado_hoy\": \"bien\",\n  \"motivo\": null,\n  \"ultimos_7_dias\": [\n    \"bien\",\n    \"bien\",\n    \"bien\",\n    \"bien\",\n    \"bien\",\n    \"bien\",\n    \"bien\"\n  ],\n  \"alerta\": null,\n  \"vacunas\": [\n    {\n      \"nombre\": \"moquillo\",\n      \"aplicada_el\": \"2026-07-16\"\n    },\n    {\n      \"nombre\": \"parvovirus\",\n      \"aplicada_el\": \"2026-07-16\"\n    },\n    {\n      \"nombre\": \"rabia\",\n      \"aplicada_el\": \"2026-07-16\"\n    }\n  ],\n  \"tratamientos\": [],\n  \"reportes\": [],\n  \"mensaje\": \"Listo, quedaron guardados los datos de Toby.\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "POST /api/perros/2/reportes · Un perro está mal (Nube decaída)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/perros/2/reportes",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "perros",
+            "2",
+            "reportes"
+          ]
+        },
+        "description": "sintomas: no_comio, comio_poco, decaido, vomito, diarrea, cojea, tose, herida. alerta trae el aviso si ya van 3 días seguidos.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"sintomas\": [\n    \"decaido\"\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "name": "201 · ejemplo",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/perros/2/reportes",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "perros",
+                "2",
+                "reportes"
+              ]
+            },
+            "description": "sintomas: no_comio, comio_poco, decaido, vomito, diarrea, cojea, tose, herida. alerta trae el aviso si ya van 3 días seguidos.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sintomas\": [\n    \"decaido\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "code": 201,
+          "status": "Created",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"id\": 10,\n  \"mensaje\": \"Listo, quedó guardado lo de Nube\",\n  \"alerta\": \"Nube lleva 3 días seguidos mal. Llame al veterinario.\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "DELETE /api/reportes/10 · Deshacer reporte",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/reportes/10",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "reportes",
+            "10"
+          ]
+        },
+        "description": "\"Me equivoqué, borrar\". 204 sin cuerpo; el aviso se recalcula solo. Use el id que devolvió el reporte."
+      },
+      "response": [
+        {
+          "name": "204 · ejemplo",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/reportes/10",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "reportes",
+                "10"
+              ]
+            },
+            "description": "\"Me equivoqué, borrar\". 204 sin cuerpo; el aviso se recalcula solo. Use el id que devolvió el reporte."
+          },
+          "code": 204,
+          "status": "No Content",
+          "header": [],
+          "_postman_previewlanguage": "text",
+          "body": ""
+        }
+      ]
+    },
+    {
+      "name": "GET /api/medicinas/hoy · Medicinas de hoy",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/medicinas/hoy",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "medicinas",
+            "hoy"
+          ]
+        },
+        "description": "Todas las dosis del día (dadas y por dar) de los perros en el refugio, en orden de hora."
+      },
+      "response": [
+        {
+          "name": "200 · ejemplo",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/medicinas/hoy",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "medicinas",
+                "hoy"
+              ]
+            },
+            "description": "Todas las dosis del día (dadas y por dar) de los perros en el refugio, en orden de hora."
+          },
+          "code": 200,
+          "status": "OK",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "_postman_previewlanguage": "json",
+          "body": "[\n  {\n    \"dosis_id\": 6,\n    \"perro_id\": 1,\n    \"perro\": \"Rocco\",\n    \"medicamento\": \"Cefalexina\",\n    \"dosis\": \"1 pastilla\",\n    \"hora\": \"02:00\",\n    \"dada_en\": \"2026-10-28T02:04:00-05:00\"\n  },\n  {\n    \"dosis_id\": 7,\n    \"perro_id\": 1,\n    \"perro\": \"Rocco\",\n    \"medicamento\": \"Cefalexina\",\n    \"dosis\": \"1 pastilla\",\n    \"hora\": \"14:00\",\n    \"dada_en\": null\n  }\n]"
+        }
+      ]
+    },
+    {
+      "name": "POST /api/dosis/7/dar · Ya se la di (Rocco)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/dosis/7/dar",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "dosis",
+            "7",
+            "dar"
+          ]
+        },
+        "description": "Marca la dosis en un solo paso (solo si sigue sin dar). Guarda la hora real. Ejemplo a las 3:05 p. m."
+      },
+      "response": [
+        {
+          "name": "200 · ejemplo",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/dosis/7/dar",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "dosis",
+                "7",
+                "dar"
+              ]
+            },
+            "description": "Marca la dosis en un solo paso (solo si sigue sin dar). Guarda la hora real. Ejemplo a las 3:05 p. m."
+          },
+          "code": 200,
+          "status": "OK",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"dada_en\": \"2026-10-28T15:05:00-05:00\",\n  \"mensaje\": \"Dada a las 3:05 p. m.\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "POST /api/dosis/7/dar · Ya se la di otra vez (409)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/dosis/7/dar",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "dosis",
+            "7",
+            "dar"
+          ]
+        },
+        "description": "La misma dosis otra vez: 409 con la hora en que se dio y la próxima. errores.dosis = [\"ya_dada\"]."
+      },
+      "response": [
+        {
+          "name": "409 · ejemplo",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/dosis/7/dar",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "dosis",
+                "7",
+                "dar"
+              ]
+            },
+            "description": "La misma dosis otra vez: 409 con la hora en que se dio y la próxima. errores.dosis = [\"ya_dada\"]."
+          },
+          "code": 409,
+          "status": "Conflict",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"mensaje\": \"Rocco ya se tomó la cefalexina a las 3:05 p. m. La próxima es a las 2:00 a. m.\",\n  \"errores\": {\n    \"dosis\": [\n      \"ya_dada\"\n    ]\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "POST /api/demo/reiniciar · Reiniciar la demo",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/demo/reiniciar",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "demo",
+            "reiniciar"
+          ]
+        },
+        "description": "Borra los datos del refugio y los siembra otra vez con las fechas de hoy (refugio:sembrar --de-nuevo)."
+      },
+      "response": [
+        {
+          "name": "200 · ejemplo",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/demo/reiniciar",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "demo",
+                "reiniciar"
+              ]
+            },
+            "description": "Borra los datos del refugio y los siembra otra vez con las fechas de hoy (refugio:sembrar --de-nuevo)."
+          },
+          "code": 200,
+          "status": "OK",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"mensaje\": \"Listo, la demo volvió al comienzo.\",\n  \"sembrado_el\": \"2026-10-28\"\n}"
+        }
+      ]
+    }
+  ]
+}

@@ -16,7 +16,7 @@ tags: [vibra, indice]
 | 6 | Pitch | Pendiente | 3 min + demo |
 
 ## ▶ Mañana se empieza aquí (miércoles 28)
-1. **Temprano, en Render:** cambiar `RESEMBRAR` a `2026-10-28` (Environment) y redesplegar, para que la demo de la mentoría tenga fechas de hoy. Revisar en Logs: "Sembrado el 2026-10-28". El jueves temprano, lo mismo con `2026-10-29`. En local: `docker compose exec app php artisan refugio:sembrar --de-nuevo`.
+1. ✅ **RESEMBRAR=2026-10-28** en `render.yaml` (commit 5b40417). Revisar en Render → Environment y Logs: "Sembrado el 2026-10-28". **Jueves temprano:** cambiar `render.yaml` a `"2026-10-29"`, commit, push, Blueprint → Manual sync si no llega, y revisar Logs. En local: `docker compose exec app php artisan refugio:sembrar --de-nuevo`.
 2. **Visita a la señora** (Biomédica) con [[preguntas-apertura]]; **contarle al profe** que la tablet es el dispositivo (Camilo).
 3. **Tarea 5** en Claude Code (rama `backend`): endpoints de Hoy, perros y reportes, con API Resources (fechas con −05:00) y Postman.
 4. **Tarea 6:** medicinas y el 409 con `update ... whereNull('dada_en')`.

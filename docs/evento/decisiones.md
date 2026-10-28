@@ -56,12 +56,24 @@ tags: [evento, decisiones]
 - "Necesita atención" = reporte ayer u hoy, o medicina pendiente hasta la hora actual, o llegó hace 3 días o menos. "Llame al veterinario" = 3 días seguidos contando hoy.
 - Veterinario por llamada y SMS, no WhatsApp (U11).
 
-## 2026-10-27 23:25 · Resiembra por fecha (revisión, punto 1)
+## 2026-10-27 23:19 · Resiembra por fecha (revisión, punto 1)
 - `RESEMBRAR=2026-10-29` en `render.yaml` reemplaza `RESEMBRAR=si`. La fecha sembrada queda en la tabla `ajustes` (clave `sembrado_el`).
 - Regla: resiembra solo si hoy es la fecha de RESEMBRAR y lo sembrado no es de hoy. Comparar solo con la fecha guardada no sirve: o resiembra en cada arranque del día anterior o deja los datos del día anterior.
 - El truncate va fuera de la transacción (en MySQL la cerraría); la siembra y el marcador van dentro de `DB::transaction`.
 
-## 2026-10-27 23:35 · Fechas (revisión, punto 3)
+## 2026-10-27 23:21 · Fechas (revisión, punto 3)
 - Trait `FechasDeBogota` en los 5 modelos: fechas con hora en ISO con −05:00; fechas sin hora con cast `date:Y-m-d`. `reportes.creado_en` pasa a `dateTime` con migración nueva (la original ya corrió en Render).
 - Para la tarea 5: responder siempre serializando modelos o API Resources; un Carbon suelto en `response()->json()` sale en UTC. "Hoy" con `today()`/`now()` de PHP, nunca funciones de fecha de la base.
 - (2026-10-27 23:24) Agregado: si hay perros pero no hay `sembrado_el`, vienen de los seeders anteriores y se resiembra. Así Render toma la historia nueva en el primer arranque después del push, sin esperar al 29.
+
+## 2026-10-28 08:41 · Endpoints de Hoy, perros y reportes (tarea 5)
+- Reglas en `app/Services/EstadoDeHoy.php` (una por perro) y `ResumenDeHoy` (pantalla Hoy). Medicina "pendiente" = dosis de hoy sin dar cuya hora ya llegó: por la mañana Rocco no sale; a las 3:00 p. m. sí.
+- Agregado al contrato (no rompe nada): la ficha trae `vacunas_al_llegar` (columna `vacunas`), `estado_hoy`, `motivo` y `reportes` de 7 días con id (para "Me equivoqué, borrar"); POST de reportes devuelve también `alerta` (texto o null); POST y PATCH de perros devuelven la ficha más `mensaje`.
+- `GET /api/perros` lista solo los que están en el refugio (34). Si se quiere el filtro "Adoptados" de Mis perros, falta agregarlo.
+- Tratamientos de la ficha: solo en curso o por empezar; los terminados irán al resumen del veterinario.
+- Respuestas sin "data" (`JsonResource::withoutWrapping`); con mensaje se arma a mano porque `additional()` vuelve a envolver.
+
+## 2026-10-28 08:51 · Medicinas, dosis y reiniciar la demo (tarea 6)
+- `GET /api/medicinas/hoy`: todas las dosis del día (dadas y por dar), con `perro_id` además de lo del contrato.
+- `POST /api/dosis/{id}/dar`: un solo `update ... whereNull('dada_en')`; 0 filas → 409 con la hora en que se dio y la próxima del mismo tratamiento. Se puede dar tarde (guarda la hora real); no se bloquea dar antes de la hora.
+- `POST /api/demo/reiniciar` (pedido por Camilo, fuera del contrato): llama a `refugio:sembrar --de-nuevo`. No tiene protección: cualquiera con la URL puede reiniciar los datos ficticios. Si molesta, se apaga con una variable.
