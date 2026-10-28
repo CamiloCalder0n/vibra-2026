@@ -17,3 +17,4 @@ Una línea por tarea terminada, la más nueva abajo, hora de Bogotá.
 - 2026-10-27 22:21 · [claude] · Tarea 2: Laravel 13 en backend/ con docker-compose (PHP 8.4 + MySQL 8.4), GET /api/salud y errores JSON uniformes; probado desde cero · qué sigue: tarea 3, desplegar en Render
 - 2026-10-27 22:28 · [claude] · Plan B y roles en flujos (Camilo construye 2–9; Biomédica 10–13) · qué sigue: tarea 3 Render
 - 2026-10-27 22:53 · [claude] · Tarea 3 lista: API en Render (https://refugio-yesenia-api.onrender.com/api/salud → ok), base refugio_yesenia dentro de facebook-db-prod · qué sigue: tarea 4 (migraciones y seeders)
+- 2026-10-27 23:04 · [claude] · Tarea 4: migraciones y modelos de las 5 tablas, seeders (35 perros, 3 tratamientos, 35 dosis, 11 reportes; casos Rocco, Nube, Toby, Bruno), StorePerroRequest, refugio:sembrar --de-nuevo; probado en MySQL y Postgres · qué sigue: tarea 5, endpoints de Hoy, perros y reportes

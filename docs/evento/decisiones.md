@@ -40,3 +40,12 @@ tags: [evento, decisiones]
 - Decisión (Camilo): Render solo da una base gratis por workspace y ya está facebook-db-prod (Oregon). La API usa una base nueva `refugio_yesenia` dentro de esa instancia; `render.yaml` ya no crea base y `DB_URL` se pega a mano.
 - Arranque: `migrate --force` siempre; `refugio:sembrar` corre los seeders solo si `perros` está vacía. Reemplaza lo de "seeders repetibles" de la entrada anterior.
 - Riesgos: comparte espacio (1 GB) y fecha de vencimiento con facebook-db-prod; si esa instancia vence o se borra, se cae la demo en línea (plan B: Docker local).
+
+## 2026-10-27 23:04 · Base de datos y seeders (tarea 4)
+- Listas fijas (sexo, como_llego, vacunas, estado, nombre de vacuna) como `string` validado con constantes del modelo, no `enum` (en Postgres es un check difícil de cambiar). `sintomas` y `horas` en columnas `json`.
+- Relaciones con otro nombre porque chocan con columnas del contrato: `Perro::registroVacunas()` (columna `vacunas`) y `Tratamiento::tomas()` (columna `dosis`).
+- `perros.vacunas` = lo que se sabía al llegar; la tabla `vacunas` = el registro actual. Bruno (no_se) no tiene filas.
+- Seeders fijos (sin Faker), fechas relativas al día de siembra. Las dosis de hoy quedan pendientes (Rocco 8:00 y 20:00, Canela 7:00 y 19:00); las de días anteriores, dadas.
+- Para el día de la demo: `refugio:sembrar --de-nuevo` (local) o `RESEMBRAR=si` en Render. Los ids quedan fijos (Nube = 2, dosis de Rocco de las 8:00 = 7).
+- `foto_url` queda vacía en los seeders: el frontend muestra la foto de ejemplo.
+- Ojo con la historia de la demo: hay 35 perros pero Chispa está adoptada, así que en el refugio quedan 34 (3 necesitan + 31 bien, no 32). Si se quiere "32 bien", se agrega un perro más.
