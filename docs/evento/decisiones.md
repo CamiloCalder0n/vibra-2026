@@ -82,3 +82,9 @@ tags: [evento, decisiones]
 - Render falló: la siembra se quedó en "PerroSeeder RUNNING" 15 min y Render cortó por no ver el puerto. No se pudo reproducir en local (Postgres vacío, APP_ENV=production, sin stdin, 0,1 CPU y 512 MB: siembra en < 1 s). Causa sin confirmar.
 - Arreglo: el puerto se abre primero; migrar y sembrar van en segundo plano con `--no-interaction`, stdin cerrado y `timeout` (TIEMPO_MAXIMO_BASE, 180 s). Si fallan, queda `[arranque] ERROR` en el log y la API sigue arriba. `PGCONNECT_TIMEOUT=10` para que una base muda no cuelgue la conexión. `refugio:sembrar` anuncia cada paso para ubicar un cuelgue.
 - Corrección: `PHP_CLI_SERVER_WORKERS=4` no tenía efecto sin `--no-reload` (un solo proceso). La prueba de 12 toques de la tarea 6 corrió con un solo worker; repetida con 4 workers: 1×200 y 11×409.
+
+## 2026-10-28 09:45 · Arranque de Render a prueba de cuelgues
+- El servidor abre el puerto primero; migrar y sembrar van en segundo plano con --no-interaction y máximo 180 s (TIEMPO_MAXIMO_BASE). Si fallan, el log dice "[arranque] ERROR" y la API sigue en línea.
+- Causa del cuelgue del PerroSeeder en Render: sin encontrar (no se reproduce en local). Si vuelve, revisar pg_stat_activity.
+- PHP_CLI_SERVER_WORKERS=4 ahora sí funciona (--no-reload). Doble dosis probada con 12 toques simultáneos: 1 × 200, 11 × 409.
+- Auto-Deploy de Render no se dispara con los push: revisar Settings → Auto-Deploy; mientras tanto, Manual Deploy.

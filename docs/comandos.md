@@ -8,6 +8,16 @@ Todo se corre en Warp, dentro de `~/Proyectos/vibra-2026`.
 ## 0. Estado del entorno
 Mac revisado el 27 oct: Docker, PHP 8.4, Composer, Node, Claude Code y GitHub al día. API en línea: https://refugio-yesenia-api.onrender.com/api/salud
 
+
+## 0.1 Rutina para no repetir errores (después de cada tarea)
+1. Pruebas: `docker compose -f backend/docker-compose.yml exec app vendor/bin/phpunit` (no `php artisan test`).
+2. Commit pequeño y `git push` en la rama de la tarea.
+3. **Render no despliega solo** si Auto-Deploy está apagado: revisar **Events**; si no arrancó, **Manual Deploy → Deploy latest commit**.
+4. En **Logs**: `Server running` → `Sembrado el …` o `Ya hay perros…` → `[arranque] Base lista.`
+5. Probar en el navegador: `/api/salud`, `/api/hoy`, `/api/medicinas/hoy`.
+6. Antes de cada mentoría: integrar a `main` (`git switch main && git merge --no-ff backend -m "Integrar…" && git push && git switch backend`).
+7. Día de demo: `RESEMBRAR` en `render.yaml` con la fecha de ese día, commit, push y Manual Deploy.
+
 ## 1. Abrir el entorno
 ```bash
 cd ~/Proyectos/vibra-2026 && claude  # pestaña 1: Claude Code
