@@ -88,3 +88,11 @@ tags: [evento, decisiones]
 - Causa del cuelgue del PerroSeeder en Render: sin encontrar (no se reproduce en local). Si vuelve, revisar pg_stat_activity.
 - PHP_CLI_SERVER_WORKERS=4 ahora sí funciona (--no-reload). Doble dosis probada con 12 toques simultáneos: 1 × 200, 11 × 409.
 - Auto-Deploy de Render no se dispara con los push: revisar Settings → Auto-Deploy; mientras tanto, Manual Deploy.
+
+## 2026-10-28 10:05 · Chequeo final antes del frontend
+- Frontend: Vite + Vue 3, sin router/Pinia/librerías de UI; fuentes con Fontsource; sin service worker; manifest con fullscreen y landscape. `VITE_API_URL` sin `/api`.
+- Formato real de la API = `backend/docs/postman.json`. Si los documentos de diseño se contradicen: textos y navegación de `contenido.md`, tamaños de `00-sistema-diseno.md` (mínimo 22 px, título 56 px). Toast: el `mensaje` de la API + "Me equivoqué, borrar".
+- "Todavía no tiene nombre" manda `"Sin nombre"`.
+- Falta `GET /api/veterinario/resumen` (se hace en backend; mientras, el frontend usa mock).
+- Riesgo de la mentoría de hoy: antes de las 2:00 p. m. Rocco no sale en Hoy (2 necesitan, 32 bien). La mentoría es a las 2:20 p. m.: sale bien.
+- Jueves: `RESEMBRAR` "2026-10-29" en render.yaml + push + Manual Deploy, y `POST /api/demo/reiniciar` a las 2:50 p. m.
