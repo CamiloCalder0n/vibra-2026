@@ -1,13 +1,17 @@
 {
   "info": {
     "name": "API del Refugio Yesenia",
-    "description": "Contrato: AGENTS.md sección 4. Errores siempre {\"mensaje\",\"errores\"} con 404, 409, 422 o 500. Ejemplos generados con los datos sembrados, a las 3:00 p. m. del día (la dosis se da a las 3:05 p. m.). En línea: cambie base_url a https://refugio-yesenia-api.onrender.com",
+    "description": "Contrato: AGENTS.md sección 4. Errores siempre {\"mensaje\",\"errores\"} con 404, 409, 422, 429 o 500. Ejemplos generados con los datos sembrados, a las 3:00 p. m. del día (la dosis se da a las 3:05 p. m.). Local: base_url = http://localhost:8000. En línea: ponga base_url = {{render_url}}.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
     {
       "key": "base_url",
       "value": "http://localhost:8000"
+    },
+    {
+      "key": "render_url",
+      "value": "https://refugio-yesenia-api.onrender.com"
     }
   ],
   "item": [
@@ -631,6 +635,86 @@
       ]
     },
     {
+      "name": "GET /api/veterinario/resumen · Para el veterinario",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/veterinario/resumen?desde=2026-10-22&hasta=2026-10-28",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "veterinario",
+            "resumen"
+          ],
+          "query": [
+            {
+              "key": "desde",
+              "value": "2026-10-22"
+            },
+            {
+              "key": "hasta",
+              "value": "2026-10-28"
+            }
+          ]
+        },
+        "description": "Resumen del rango (sin desde/hasta: de hace 6 días a hoy). revisar: perros con reportes (alerta = 3 días seguidos en el rango); tratamientos que se cruzan con el rango (dosis dadas/total dentro del rango); recien_llegados: llego_el en el rango."
+      },
+      "response": [
+        {
+          "name": "200 · ejemplo",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/veterinario/resumen?desde=2026-10-22&hasta=2026-10-28",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "veterinario",
+                "resumen"
+              ],
+              "query": [
+                {
+                  "key": "desde",
+                  "value": "2026-10-22"
+                },
+                {
+                  "key": "hasta",
+                  "value": "2026-10-28"
+                }
+              ]
+            },
+            "description": "Resumen del rango (sin desde/hasta: de hace 6 días a hoy). revisar: perros con reportes (alerta = 3 días seguidos en el rango); tratamientos que se cruzan con el rango (dosis dadas/total dentro del rango); recien_llegados: llego_el en el rango."
+          },
+          "code": 200,
+          "status": "OK",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"desde\": \"2026-10-22\",\n  \"hasta\": \"2026-10-28\",\n  \"revisar\": [\n    {\n      \"id\": 2,\n      \"nombre\": \"Nube\",\n      \"dias_con_reporte\": 2,\n      \"sintomas\": [\n        \"comio_poco\"\n      ],\n      \"alerta\": false\n    },\n    {\n      \"id\": 15,\n      \"nombre\": \"Coco\",\n      \"dias_con_reporte\": 1,\n      \"sintomas\": [\n        \"tose\"\n      ],\n      \"alerta\": false\n    },\n    {\n      \"id\": 17,\n      \"nombre\": \"Duque\",\n      \"dias_con_reporte\": 1,\n      \"sintomas\": [\n        \"decaido\"\n      ],\n      \"alerta\": false\n    },\n    {\n      \"id\": 7,\n      \"nombre\": \"Lucas\",\n      \"dias_con_reporte\": 1,\n      \"sintomas\": [\n        \"vomito\"\n      ],\n      \"alerta\": false\n    },\n    {\n      \"id\": 6,\n      \"nombre\": \"Mona\",\n      \"dias_con_reporte\": 1,\n      \"sintomas\": [\n        \"diarrea\"\n      ],\n      \"alerta\": false\n    },\n    {\n      \"id\": 9,\n      \"nombre\": \"Pirata\",\n      \"dias_con_reporte\": 1,\n      \"sintomas\": [\n        \"cojea\"\n      ],\n      \"alerta\": false\n    },\n    {\n      \"id\": 30,\n      \"nombre\": \"Tita\",\n      \"dias_con_reporte\": 1,\n      \"sintomas\": [\n        \"no_comio\"\n      ],\n      \"alerta\": false\n    },\n    {\n      \"id\": 24,\n      \"nombre\": \"Zeus\",\n      \"dias_con_reporte\": 1,\n      \"sintomas\": [\n        \"herida\"\n      ],\n      \"alerta\": false\n    }\n  ],\n  \"tratamientos\": [\n    {\n      \"id\": 2,\n      \"perro_id\": 5,\n      \"perro\": \"Canela\",\n      \"medicamento\": \"Gotas para el ojo\",\n      \"dosis\": \"2 gotas en el ojo izquierdo\",\n      \"horas\": [\n        \"07:00\",\n        \"19:00\"\n      ],\n      \"desde\": \"2026-10-21\",\n      \"hasta\": \"2026-10-27\",\n      \"dosis_dadas\": 12,\n      \"dosis_total\": 12\n    },\n    {\n      \"id\": 3,\n      \"perro_id\": 9,\n      \"perro\": \"Pirata\",\n      \"medicamento\": \"Meloxicam\",\n      \"dosis\": \"Media pastilla con la comida\",\n      \"horas\": [\n        \"08:00\"\n      ],\n      \"desde\": \"2026-10-22\",\n      \"hasta\": \"2026-10-26\",\n      \"dosis_dadas\": 5,\n      \"dosis_total\": 5\n    },\n    {\n      \"id\": 1,\n      \"perro_id\": 1,\n      \"perro\": \"Rocco\",\n      \"medicamento\": \"Cefalexina\",\n      \"dosis\": \"1 pastilla\",\n      \"horas\": [\n        \"14:00\",\n        \"02:00\"\n      ],\n      \"desde\": \"2026-10-25\",\n      \"hasta\": \"2026-10-31\",\n      \"dosis_dadas\": 6,\n      \"dosis_total\": 7\n    }\n  ],\n  \"recien_llegados\": [\n    {\n      \"id\": 4,\n      \"nombre\": \"Bruno\",\n      \"descripcion\": \"Macho, criollo canela, unos 2 años\",\n      \"como_llego\": \"flaco\",\n      \"vacunas_al_llegar\": \"no_se\",\n      \"llego_el\": \"2026-10-26\"\n    },\n    {\n      \"id\": 36,\n      \"nombre\": \"Lucero\",\n      \"descripcion\": \"Hembra, criolla amarilla, unos 3 años\",\n      \"como_llego\": \"flaco\",\n      \"vacunas_al_llegar\": \"no_se\",\n      \"llego_el\": \"2026-10-28\"\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
       "name": "POST /api/dosis/7/dar · Ya se la di (Rocco)",
       "request": {
         "method": "POST",
@@ -775,7 +859,7 @@
             "reiniciar"
           ]
         },
-        "description": "Borra los datos del refugio y los siembra otra vez con las fechas de hoy (refugio:sembrar --de-nuevo)."
+        "description": "Borra los datos del refugio y los siembra otra vez con las fechas de hoy (refugio:sembrar --de-nuevo). Máximo 3 por minuto (throttle:3,1); la cuarta responde 429."
       },
       "response": [
         {
@@ -799,7 +883,7 @@
                 "reiniciar"
               ]
             },
-            "description": "Borra los datos del refugio y los siembra otra vez con las fechas de hoy (refugio:sembrar --de-nuevo)."
+            "description": "Borra los datos del refugio y los siembra otra vez con las fechas de hoy (refugio:sembrar --de-nuevo). Máximo 3 por minuto (throttle:3,1); la cuarta responde 429."
           },
           "code": 200,
           "status": "OK",
