@@ -44,12 +44,15 @@ Contrato y ejemplos: `AGENTS.md` sección 4. Colección de Postman con un ejempl
 | PATCH `/api/perros/{id}` | Cambiar datos (`UpdatePerroRequest`) |
 | POST `/api/perros/{id}/reportes` | Un perro está mal → 201 con `alerta` |
 | DELETE `/api/reportes/{id}` | Me equivoqué, borrar → 204 |
+| GET `/api/medicinas/hoy` | Medicinas (todas las dosis de hoy, dadas y por dar) |
+| POST `/api/dosis/{id}/dar` | Ya se la di → 200 · si ya se dio, 409 `ya_dada` con la hora y la próxima |
+| POST `/api/demo/reiniciar` | Botón de reiniciar la demo (`refugio:sembrar --de-nuevo`) |
 
 Las reglas de "necesita atención" y "3 días seguidos" se calculan en PHP (`app/Services/EstadoDeHoy.php`) con la hora de Bogotá. Una medicina cuenta como pendiente solo cuando ya llegó su hora: por la mañana Rocco no sale en Hoy; a las 3:00 p. m. sí.
 
 ## Pruebas
 
-`vendor/bin/phpunit` (en el computador, con SQLite en memoria). `tests/Feature/HistoriaDemoTest.php` recorre la historia de la demo con el reloj en el jueves 29 a las 3:00 p. m.
+`vendor/bin/phpunit` (en el computador, con SQLite en memoria). `tests/Feature/HistoriaDemoTest.php` recorre la historia de la demo con el reloj en el jueves 29 a las 3:00 p. m. (incluye Rocco: dar → 200, otra vez → 409)
 
 ## Variables principales
 
