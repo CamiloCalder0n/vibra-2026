@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\DosisController;
 use App\Http\Controllers\Api\HoyController;
 use App\Http\Controllers\Api\MedicinaController;
 use App\Http\Controllers\Api\PerroController;
@@ -15,3 +16,4 @@ Route::post('/perros/{perro}/reportes', [ReporteController::class, 'store']);
 Route::delete('/reportes/{reporte}', [ReporteController::class, 'destroy']);
 
 Route::get('/medicinas/hoy', [MedicinaController::class, 'hoy']);
+Route::post('/dosis/{dosis}/dar', [DosisController::class, 'dar']);
