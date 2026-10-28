@@ -1,0 +1,52 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+
+#[Table('perros')]
+#[Fillable(['nombre', 'sexo', 'descripcion', 'edad_aprox', 'foto_url', 'como_llego', 'vacunas', 'cuidados', 'llego_el', 'estado'])]
+class Perro extends Model
+{
+    public const SEXOS = ['macho', 'hembra', 'no_se'];
+
+    public const COMO_LLEGO = ['bien', 'flaco', 'herido', 'enfermo'];
+
+    public const VACUNAS = ['si', 'no', 'no_se'];
+
+    public const ESTADOS = ['en_refugio', 'adoptado'];
+
+    protected $attributes = ['estado' => 'en_refugio'];
+
+    protected function casts(): array
+    {
+        return [
+            'llego_el' => 'date',
+        ];
+    }
+
+    public function reportes(): HasMany
+    {
+        return $this->hasMany(Reporte::class);
+    }
+
+    public function tratamientos(): HasMany
+    {
+        return $this->hasMany(Tratamiento::class);
+    }
+
+    public function dosis(): HasManyThrough
+    {
+        return $this->hasManyThrough(Dosis::class, Tratamiento::class);
+    }
+
+    // No se llama vacunas() porque la columna `vacunas` (si | no | no_se) taparía la relación.
+    public function registroVacunas(): HasMany
+    {
+        return $this->hasMany(Vacuna::class);
+    }
+}
