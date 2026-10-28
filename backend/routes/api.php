@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\MedicinaController;
 use App\Http\Controllers\Api\PerroController;
 use App\Http\Controllers\Api\ReporteController;
 use App\Http\Controllers\Api\SaludController;
+use App\Http\Controllers\Api\VeterinarioController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/salud', SaludController::class);
@@ -18,5 +19,7 @@ Route::delete('/reportes/{reporte}', [ReporteController::class, 'destroy']);
 
 Route::get('/medicinas/hoy', [MedicinaController::class, 'hoy']);
 Route::post('/dosis/{dosis}/dar', [DosisController::class, 'dar']);
+
+Route::get('/veterinario/resumen', [VeterinarioController::class, 'resumen']);
 
 Route::post('/demo/reiniciar', [DemoController::class, 'reiniciar']);
