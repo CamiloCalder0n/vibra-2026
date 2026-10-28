@@ -11,3 +11,4 @@ Route::get('/hoy', HoyController::class);
 
 Route::apiResource('perros', PerroController::class)->only(['index', 'show', 'store', 'update']);
 Route::post('/perros/{perro}/reportes', [ReporteController::class, 'store']);
+Route::delete('/reportes/{reporte}', [ReporteController::class, 'destroy']);

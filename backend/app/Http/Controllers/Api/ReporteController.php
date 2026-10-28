@@ -7,6 +7,7 @@ use App\Models\Perro;
 use App\Models\Reporte;
 use App\Services\EstadoDeHoy;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -36,5 +37,13 @@ class ReporteController extends Controller
             'mensaje' => "Listo, quedó guardado lo de {$perro->nombre}",
             'alerta' => (new EstadoDeHoy($perro->load('reportesRecientes', 'dosisDeHoy.tratamiento')))->textoAlerta(),
         ], 201);
+    }
+
+    // "Me equivoqué, borrar" (o Deshacer). El estado de hoy se recalcula solo: no hay nada guardado aparte.
+    public function destroy(Reporte $reporte): Response
+    {
+        $reporte->delete();
+
+        return response()->noContent();
     }
 }
