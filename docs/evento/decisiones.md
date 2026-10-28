@@ -56,12 +56,12 @@ tags: [evento, decisiones]
 - "Necesita atención" = reporte ayer u hoy, o medicina pendiente hasta la hora actual, o llegó hace 3 días o menos. "Llame al veterinario" = 3 días seguidos contando hoy.
 - Veterinario por llamada y SMS, no WhatsApp (U11).
 
-## 2026-10-27 23:25 · Resiembra por fecha (revisión, punto 1)
+## 2026-10-27 23:19 · Resiembra por fecha (revisión, punto 1)
 - `RESEMBRAR=2026-10-29` en `render.yaml` reemplaza `RESEMBRAR=si`. La fecha sembrada queda en la tabla `ajustes` (clave `sembrado_el`).
 - Regla: resiembra solo si hoy es la fecha de RESEMBRAR y lo sembrado no es de hoy. Comparar solo con la fecha guardada no sirve: o resiembra en cada arranque del día anterior o deja los datos del día anterior.
 - El truncate va fuera de la transacción (en MySQL la cerraría); la siembra y el marcador van dentro de `DB::transaction`.
 
-## 2026-10-27 23:35 · Fechas (revisión, punto 3)
+## 2026-10-27 23:21 · Fechas (revisión, punto 3)
 - Trait `FechasDeBogota` en los 5 modelos: fechas con hora en ISO con −05:00; fechas sin hora con cast `date:Y-m-d`. `reportes.creado_en` pasa a `dateTime` con migración nueva (la original ya corrió en Render).
 - Para la tarea 5: responder siempre serializando modelos o API Resources; un Carbon suelto en `response()->json()` sale en UTC. "Hoy" con `today()`/`now()` de PHP, nunca funciones de fecha de la base.
 - (2026-10-27 23:24) Agregado: si hay perros pero no hay `sembrado_el`, vienen de los seeders anteriores y se resiembra. Así Render toma la historia nueva en el primer arranque después del push, sin esperar al 29.
