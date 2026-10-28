@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "API del Refugio Yesenia",
-    "description": "Contrato: AGENTS.md sección 4. Errores siempre {\"mensaje\",\"errores\"} con 404, 409, 422 o 500. Ejemplos generados con los datos sembrados, a las 3:00 p. m. del día. En línea: cambie base_url a https://refugio-yesenia-api.onrender.com",
+    "description": "Contrato: AGENTS.md sección 4. Errores siempre {\"mensaje\",\"errores\"} con 404, 409, 422 o 500. Ejemplos generados con los datos sembrados, a las 3:00 p. m. del día (la dosis se da a las 3:05 p. m.). En línea: cambie base_url a https://refugio-yesenia-api.onrender.com",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -536,7 +536,7 @@
             "10"
           ]
         },
-        "description": "\"Me equivoqué, borrar\". 204 sin cuerpo; el aviso se recalcula solo."
+        "description": "\"Me equivoqué, borrar\". 204 sin cuerpo; el aviso se recalcula solo. Use el id que devolvió el reporte."
       },
       "response": [
         {
@@ -560,13 +560,257 @@
                 "10"
               ]
             },
-            "description": "\"Me equivoqué, borrar\". 204 sin cuerpo; el aviso se recalcula solo."
+            "description": "\"Me equivoqué, borrar\". 204 sin cuerpo; el aviso se recalcula solo. Use el id que devolvió el reporte."
           },
           "code": 204,
           "status": "No Content",
           "header": [],
           "_postman_previewlanguage": "text",
           "body": ""
+        }
+      ]
+    },
+    {
+      "name": "GET /api/medicinas/hoy · Medicinas de hoy",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/medicinas/hoy",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "medicinas",
+            "hoy"
+          ]
+        },
+        "description": "Todas las dosis del día (dadas y por dar) de los perros en el refugio, en orden de hora."
+      },
+      "response": [
+        {
+          "name": "200 · ejemplo",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/medicinas/hoy",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "medicinas",
+                "hoy"
+              ]
+            },
+            "description": "Todas las dosis del día (dadas y por dar) de los perros en el refugio, en orden de hora."
+          },
+          "code": 200,
+          "status": "OK",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "_postman_previewlanguage": "json",
+          "body": "[\n  {\n    \"dosis_id\": 6,\n    \"perro_id\": 1,\n    \"perro\": \"Rocco\",\n    \"medicamento\": \"Cefalexina\",\n    \"dosis\": \"1 pastilla\",\n    \"hora\": \"02:00\",\n    \"dada_en\": \"2026-10-28T02:04:00-05:00\"\n  },\n  {\n    \"dosis_id\": 7,\n    \"perro_id\": 1,\n    \"perro\": \"Rocco\",\n    \"medicamento\": \"Cefalexina\",\n    \"dosis\": \"1 pastilla\",\n    \"hora\": \"14:00\",\n    \"dada_en\": null\n  }\n]"
+        }
+      ]
+    },
+    {
+      "name": "POST /api/dosis/7/dar · Ya se la di (Rocco)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/dosis/7/dar",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "dosis",
+            "7",
+            "dar"
+          ]
+        },
+        "description": "Marca la dosis en un solo paso (solo si sigue sin dar). Guarda la hora real. Ejemplo a las 3:05 p. m."
+      },
+      "response": [
+        {
+          "name": "200 · ejemplo",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/dosis/7/dar",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "dosis",
+                "7",
+                "dar"
+              ]
+            },
+            "description": "Marca la dosis en un solo paso (solo si sigue sin dar). Guarda la hora real. Ejemplo a las 3:05 p. m."
+          },
+          "code": 200,
+          "status": "OK",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"dada_en\": \"2026-10-28T15:05:00-05:00\",\n  \"mensaje\": \"Dada a las 3:05 p. m.\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "POST /api/dosis/7/dar · Ya se la di otra vez (409)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/dosis/7/dar",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "dosis",
+            "7",
+            "dar"
+          ]
+        },
+        "description": "La misma dosis otra vez: 409 con la hora en que se dio y la próxima. errores.dosis = [\"ya_dada\"]."
+      },
+      "response": [
+        {
+          "name": "409 · ejemplo",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/dosis/7/dar",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "dosis",
+                "7",
+                "dar"
+              ]
+            },
+            "description": "La misma dosis otra vez: 409 con la hora en que se dio y la próxima. errores.dosis = [\"ya_dada\"]."
+          },
+          "code": 409,
+          "status": "Conflict",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"mensaje\": \"Rocco ya se tomó la cefalexina a las 3:05 p. m. La próxima es a las 2:00 a. m.\",\n  \"errores\": {\n    \"dosis\": [\n      \"ya_dada\"\n    ]\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "POST /api/demo/reiniciar · Reiniciar la demo",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/demo/reiniciar",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "demo",
+            "reiniciar"
+          ]
+        },
+        "description": "Borra los datos del refugio y los siembra otra vez con las fechas de hoy (refugio:sembrar --de-nuevo)."
+      },
+      "response": [
+        {
+          "name": "200 · ejemplo",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/demo/reiniciar",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "demo",
+                "reiniciar"
+              ]
+            },
+            "description": "Borra los datos del refugio y los siembra otra vez con las fechas de hoy (refugio:sembrar --de-nuevo)."
+          },
+          "code": 200,
+          "status": "OK",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"mensaje\": \"Listo, la demo volvió al comienzo.\",\n  \"sembrado_el\": \"2026-10-28\"\n}"
         }
       ]
     }
