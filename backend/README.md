@@ -30,6 +30,27 @@ La primera vez, genere la llave: `docker compose exec app php artisan key:genera
 - Comandos de artisan: `docker compose exec app php artisan <comando>`.
 - Borrar la base y empezar de cero: `docker compose down -v`.
 
+## Endpoints
+
+Contrato y ejemplos: `AGENTS.md` sección 4. Colección de Postman con un ejemplo real por endpoint: `backend/docs/postman.json` (variable `base_url`).
+
+| Método y ruta | Pantalla |
+|---|---|
+| GET `/api/salud` | — |
+| GET `/api/hoy` | Hoy (necesitan, medicinas pendientes, en_refugio, bien) |
+| GET `/api/perros?filtro=mal\|medicina\|nuevos` | Mis perros (solo los que están en el refugio) |
+| GET `/api/perros/{id}` | Ficha |
+| POST `/api/perros` | Llegó un perro (`StorePerroRequest`) → 201 |
+| PATCH `/api/perros/{id}` | Cambiar datos (`UpdatePerroRequest`) |
+| POST `/api/perros/{id}/reportes` | Un perro está mal → 201 con `alerta` |
+| DELETE `/api/reportes/{id}` | Me equivoqué, borrar → 204 |
+
+Las reglas de "necesita atención" y "3 días seguidos" se calculan en PHP (`app/Services/EstadoDeHoy.php`) con la hora de Bogotá. Una medicina cuenta como pendiente solo cuando ya llegó su hora: por la mañana Rocco no sale en Hoy; a las 3:00 p. m. sí.
+
+## Pruebas
+
+`vendor/bin/phpunit` (en el computador, con SQLite en memoria). `tests/Feature/HistoriaDemoTest.php` recorre la historia de la demo con el reloj en el jueves 29 a las 3:00 p. m.
+
 ## Variables principales
 
 | Variable | Local | Render |

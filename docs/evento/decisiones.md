@@ -65,3 +65,10 @@ tags: [evento, decisiones]
 - Trait `FechasDeBogota` en los 5 modelos: fechas con hora en ISO con −05:00; fechas sin hora con cast `date:Y-m-d`. `reportes.creado_en` pasa a `dateTime` con migración nueva (la original ya corrió en Render).
 - Para la tarea 5: responder siempre serializando modelos o API Resources; un Carbon suelto en `response()->json()` sale en UTC. "Hoy" con `today()`/`now()` de PHP, nunca funciones de fecha de la base.
 - (2026-10-27 23:24) Agregado: si hay perros pero no hay `sembrado_el`, vienen de los seeders anteriores y se resiembra. Así Render toma la historia nueva en el primer arranque después del push, sin esperar al 29.
+
+## 2026-10-28 08:41 · Endpoints de Hoy, perros y reportes (tarea 5)
+- Reglas en `app/Services/EstadoDeHoy.php` (una por perro) y `ResumenDeHoy` (pantalla Hoy). Medicina "pendiente" = dosis de hoy sin dar cuya hora ya llegó: por la mañana Rocco no sale; a las 3:00 p. m. sí.
+- Agregado al contrato (no rompe nada): la ficha trae `vacunas_al_llegar` (columna `vacunas`), `estado_hoy`, `motivo` y `reportes` de 7 días con id (para "Me equivoqué, borrar"); POST de reportes devuelve también `alerta` (texto o null); POST y PATCH de perros devuelven la ficha más `mensaje`.
+- `GET /api/perros` lista solo los que están en el refugio (34). Si se quiere el filtro "Adoptados" de Mis perros, falta agregarlo.
+- Tratamientos de la ficha: solo en curso o por empezar; los terminados irán al resumen del veterinario.
+- Respuestas sin "data" (`JsonResource::withoutWrapping`); con mensaje se arma a mano porque `additional()` vuelve a envolver.
