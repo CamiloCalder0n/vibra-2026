@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\DemoController;
 use App\Http\Controllers\Api\DosisController;
 use App\Http\Controllers\Api\HoyController;
 use App\Http\Controllers\Api\MedicinaController;
@@ -17,3 +18,5 @@ Route::delete('/reportes/{reporte}', [ReporteController::class, 'destroy']);
 
 Route::get('/medicinas/hoy', [MedicinaController::class, 'hoy']);
 Route::post('/dosis/{dosis}/dar', [DosisController::class, 'dar']);
+
+Route::post('/demo/reiniciar', [DemoController::class, 'reiniciar']);

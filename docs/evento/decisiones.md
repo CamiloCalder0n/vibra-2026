@@ -72,3 +72,8 @@ tags: [evento, decisiones]
 - `GET /api/perros` lista solo los que están en el refugio (34). Si se quiere el filtro "Adoptados" de Mis perros, falta agregarlo.
 - Tratamientos de la ficha: solo en curso o por empezar; los terminados irán al resumen del veterinario.
 - Respuestas sin "data" (`JsonResource::withoutWrapping`); con mensaje se arma a mano porque `additional()` vuelve a envolver.
+
+## 2026-10-28 08:51 · Medicinas, dosis y reiniciar la demo (tarea 6)
+- `GET /api/medicinas/hoy`: todas las dosis del día (dadas y por dar), con `perro_id` además de lo del contrato.
+- `POST /api/dosis/{id}/dar`: un solo `update ... whereNull('dada_en')`; 0 filas → 409 con la hora en que se dio y la próxima del mismo tratamiento. Se puede dar tarde (guarda la hora real); no se bloquea dar antes de la hora.
+- `POST /api/demo/reiniciar` (pedido por Camilo, fuera del contrato): llama a `refugio:sembrar --de-nuevo`. No tiene protección: cualquiera con la URL puede reiniciar los datos ficticios. Si molesta, se apaga con una variable.
