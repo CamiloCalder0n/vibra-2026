@@ -35,3 +35,8 @@ tags: [evento, decisiones]
 - Decisión: PostgreSQL 16 de Render en línea, MySQL 8.4 en local; solo Eloquent y migraciones, nada de SQL propio de un motor. Blueprint en `render.yaml` (raíz), región Oregon, plan gratis.
 - Consecuencia: cada despliegue corre `migrate --seed --force`, así que los seeders de la tarea 4 deben poder repetirse sin duplicar (`updateOrCreate` o revisar si ya hay datos).
 - Riesgos: el plan gratis duerme el servicio (abrir la URL 5 min antes) y la base gratis de Render vence a los 30 días (sirve para el reto).
+
+## 2026-10-27 22:55 · Render usa la instancia Postgres existente
+- Decisión (Camilo): Render solo da una base gratis por workspace y ya está facebook-db-prod (Oregon). La API usa una base nueva `refugio_yesenia` dentro de esa instancia; `render.yaml` ya no crea base y `DB_URL` se pega a mano.
+- Arranque: `migrate --force` siempre; `refugio:sembrar` corre los seeders solo si `perros` está vacía. Reemplaza lo de "seeders repetibles" de la entrada anterior.
+- Riesgos: comparte espacio (1 GB) y fecha de vencimiento con facebook-db-prod; si esa instancia vence o se borra, se cae la demo en línea (plan B: Docker local).

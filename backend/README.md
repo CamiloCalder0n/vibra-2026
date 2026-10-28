@@ -14,7 +14,7 @@ La primera vez, genere la llave: `docker compose exec app php artisan key:genera
 
 - API: http://localhost:8000/api/salud → `{"ok":true}`
 - MySQL desde el computador: `localhost:3307`, usuario `refugio`, clave `refugio_local`, base `refugio`.
-- Al arrancar se ejecuta `php artisan migrate --seed --force`.
+- Al arrancar se ejecuta `php artisan migrate --force` y luego `php artisan refugio:sembrar`, que siembra solo si la tabla `perros` está vacía (redesplegar no duplica).
 - Comandos de artisan: `docker compose exec app php artisan <comando>`.
 - Borrar la base y empezar de cero: `docker compose down -v`.
 
@@ -25,7 +25,8 @@ La primera vez, genere la llave: `docker compose exec app php artisan key:genera
 | `APP_KEY` | `php artisan key:generate` | la misma llave, como variable |
 | `APP_ENV` / `APP_DEBUG` | `local` / `true` | `production` / `false` |
 | `APP_TIMEZONE` | `America/Bogota` | `America/Bogota` |
-| `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` | servicio `db` del compose | los de la base en línea |
+| `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` | servicio `db` del compose | no se usan |
+| `DB_CONNECTION` / `DB_URL` | `mysql` / vacía | `pgsql` / Internal Database URL de facebook-db-prod terminada en `/refugio_yesenia` |
 | `PORT` | 8000 | la pone Render |
 
 ## Errores
