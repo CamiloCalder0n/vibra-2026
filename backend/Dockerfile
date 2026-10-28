@@ -19,7 +19,9 @@ RUN composer dump-autoload --optimize \
     && chown -R www-data:www-data storage bootstrap/cache
 
 # Render define PORT; en local usamos 8000.
-ENV PORT=8000
+# PGCONNECT_TIMEOUT: si Postgres no contesta, la conexión falla a los 10 s en vez de esperar para siempre.
+ENV PORT=8000 \
+    PGCONNECT_TIMEOUT=10
 EXPOSE 8000
 
 ENTRYPOINT ["sh", "docker/entrypoint.sh"]

@@ -36,6 +36,7 @@ Artisan::command('refugio:sembrar {--de-nuevo} {--fecha=}', function () {
     }
 
     if ($deNuevo) {
+        $this->info('Borrando los datos del refugio...');
         // Fuera de la transacción: en MySQL un truncate la cerraría. Truncate reinicia los ids (Nube y Rocco quedan igual).
         Schema::withoutForeignKeyConstraints(function () {
             foreach (['dosis', 'tratamientos', 'reportes', 'vacunas', 'perros'] as $tabla) {
@@ -44,6 +45,8 @@ Artisan::command('refugio:sembrar {--de-nuevo} {--fecha=}', function () {
         });
         $this->info('Se borraron los datos del refugio; se siembran de nuevo.');
     }
+
+    $this->info("Sembrando los datos del refugio con las fechas de {$hoy}...");
 
     // Si algo falla, no queda media siembra: las tablas quedan vacías y el próximo arranque siembra otra vez.
     DB::transaction(function () use ($hoy) {
