@@ -1,0 +1,33 @@
+# Blueprint de Render: API del Refugio Yesenia (backend/).
+# La base es refugio_yesenia dentro de la instancia Postgres existente (facebook-db-prod); DB_URL se pega a mano.
+services:
+  - type: web
+    name: refugio-yesenia-api
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerContext: ./backend
+    dockerfilePath: ./backend/Dockerfile
+    healthCheckPath: /api/salud
+    buildFilter:
+      paths:
+        - backend/**
+    envVars:
+      - key: APP_KEY
+        sync: false   # se pega en el panel: salida de `php artisan key:generate --show`
+      - key: APP_NAME
+        value: Refugio Yesenia
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_TIMEZONE
+        value: America/Bogota
+      - key: APP_LOCALE
+        value: es
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_URL
+        sync: false   # Internal Database URL de facebook-db-prod terminada en /refugio_yesenia

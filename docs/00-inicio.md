@@ -19,7 +19,7 @@ tags: [vibra, indice]
 ### Hoy martes (hasta las 11:30 p. m.)
 1. ~~Decidir la solución~~ → **a, app de tablet** (10:05 p. m.).
 2. ~~Endpoints y JSON~~ → listos en AGENTS.md sección 4.
-3. **Esqueleto Laravel + Docker + despliegue en Render** (Camilo).
+3. ~~Esqueleto Laravel + Docker + despliegue en Render~~ → en línea: https://refugio-yesenia-api.onrender.com/api/salud responde {"ok":true} (10:53 p. m.).
 4. Biomédica: leer [[preguntas-apertura]], repartir los roles de la visita y llenar [[aporte-biomedica]].
 5. **Turnos de descanso**: nadie trasnocha las dos noches.
 

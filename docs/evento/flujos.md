@@ -81,3 +81,18 @@ Miércoles 28 a las 10:00 p. m. Después solo errores, video y pitch.
 
 ## 12. Endpoints
 En AGENTS.md sección 4 (contrato único).
+
+## 13. Respaldos de la demo (para que la app no falle en vivo)
+| Si pasa esto | Hacemos esto | Desde cuándo se prepara |
+|---|---|---|
+| El backend no queda listo para el miércoles a las 12 m. | El frontend usa datos fijos en JSON con el mismo formato del contrato (la demo se ve igual) | Desde la tarea 7: el frontend arranca con datos falsos |
+| Render falla o está dormido en la demo | Demo local con `docker compose up` en el Mac, sin internet | Probar el respaldo local antes de cada mentoría |
+| La app no funciona en la tablet | Se muestra en el Mac a pantalla completa con el tamaño de la tablet | Miércoles en la tarde |
+| Algo se cae en vivo | Video de respaldo de 90 s | Jueves a las 12 m. |
+
+## 14. Plan B: otra solución (pendiente de decidir)
+La app es la solución principal. El plan B es **otro proyecto aparte**, contra el mismo problema; Cami decide cuál y quién lo hace. Candidatos (de [[02-problema]] y la lluvia de ideas): tablero vivo + reloj de medicinas (hardware, cumple P2), el oído del albergue, la báscula del comedero, el canil que habla.
+
+## 15. Roles (actualizado 27 oct, 10:30 p. m.)
+- **Camilo:** tareas 2–9 (backend, despliegue y app con Claude Code, en orden) e integración a `main`.
+- **Biomédica:** 10 (datos de los 35 perros), 11 (aporte biomédico), 12 (prueba con la usuaria), 13 (pitch y fuentes) y la visita a la señora.
