@@ -14,6 +14,14 @@ class StorePerroRequest extends FormRequest
         return true; // sin login: un solo perfil (AGENTS.md regla 2)
     }
 
+    // Si no se dice cuándo llegó, llegó hoy (fecha de Bogotá calculada en PHP).
+    protected function prepareForValidation(): void
+    {
+        if (blank($this->input('llego_el'))) {
+            $this->merge(['llego_el' => today()->toDateString()]);
+        }
+    }
+
     public function rules(): array
     {
         return [
