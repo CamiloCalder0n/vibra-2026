@@ -27,7 +27,7 @@ Si una tarea depende de esto: pregunta, o decide lo más simple y anótalo en `d
 - Idea: **app de tablet del Refugio Yesenia** para la dueña. Registro por excepción: solo se reporta el perro que está mal; los demás quedan "bien". Decidido el 27 oct (opción a).
 - Qué aporta Biomédica: seguridad en la administración de medicamentos (los "5 correctos" y el bloqueo de la doble dosis), signos de alarma y regla de 3 días seguidos, y prueba con usuaria (SUS).
 - Tipo de solución: app para tablet Android de 10" en horizontal (PWA) + API.
-- Stack: Laravel 12 MVC como API REST + MySQL en Docker, desplegado en Render. Frontend en `frontend/` consumiendo la API. Sin login (un solo perfil).
+- Stack: Laravel MVC como API REST + MySQL en Docker, desplegado en Render. Frontend en `frontend/` consumiendo la API. Sin login (un solo perfil).
 - Qué se simula: la semana anterior (seeders), la voz (navegador), WhatsApp (enlace wa.me), las fotos.
 - Carpetas: `backend/` (Laravel) · `frontend/` (app) · `docs/`.
 

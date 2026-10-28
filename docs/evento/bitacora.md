@@ -14,3 +14,4 @@ Una línea por tarea terminada, la más nueva abajo, hora de Bogotá.
 - 2026-10-27 21:43 · [claude] · Identidad Huellitas (salvia/crema, huella en casa) aplicada al mockup · qué sigue: endpoints y JSON con laravel-api desde Claude Code
 - 2026-10-27 21:59 · [claude] · Obsidian limpio: 00-inicio con el flujo, 01-reto-hechos, 02-problema, restricciones (requerimientos), preguntas de la visita, diseño en docs/diseno, lo viejo en _archivo · qué sigue: decidir la solución
 - 2026-10-27 22:04 · [claude] · Solución a (app de tablet) decidida; flujos.md completo (historia, dentro/fuera, 13 tareas, guion); contrato y endpoints en AGENTS.md sección 4 · qué sigue: tarea 2, Laravel + Docker
+- 2026-10-27 22:21 · [claude] · Tarea 2: Laravel 13 en backend/ con docker-compose (PHP 8.4 + MySQL 8.4), GET /api/salud y errores JSON uniformes; probado desde cero · qué sigue: tarea 3, desplegar en Render

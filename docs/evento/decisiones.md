@@ -26,3 +26,7 @@ tags: [evento, decisiones]
 - Por qué: decisión del equipo (Cami). Ataca las problemáticas 1, 2 y 3 y respeta U1–U5.
 - Riesgo aceptado: el profe dijo "página web no sirve, hardware" (P2). Se le cuenta mañana temprano; si lo exige, la opción b (sumar una pieza física) queda lista en [[00-inicio]].
 - Contrato de datos y endpoints: AGENTS.md sección 4.
+
+## 2026-10-27 22:21 · Esqueleto del backend (tarea 2)
+- Decisión: Laravel 13 + MySQL 8.4 con `php artisan serve` dentro de un solo `Dockerfile` (sirve para compose y para Render). Rutas API registradas a mano, sin `install:api`, para no instalar Sanctum (sin login).
+- Supuestos: zona horaria `America/Bogota`, idioma `es`. MySQL publicado en el puerto 3307 del computador. Laravel Boost no se instala (es un extra).
