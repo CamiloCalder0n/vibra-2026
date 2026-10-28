@@ -55,3 +55,8 @@ tags: [evento, decisiones]
 - Historia de la demo ajustada a la presentación del jueves a las 3 p. m.: Rocco con dosis a las 2:00 p. m. y 2:00 a. m.; Nube con 2 días sembrados y el tercero en vivo; perro nuevo en vivo: Lucero; conteos calculados (34 en el refugio, 3 necesitan, 31 bien).
 - "Necesita atención" = reporte ayer u hoy, o medicina pendiente hasta la hora actual, o llegó hace 3 días o menos. "Llame al veterinario" = 3 días seguidos contando hoy.
 - Veterinario por llamada y SMS, no WhatsApp (U11).
+
+## 2026-10-27 23:25 · Resiembra por fecha (revisión, punto 1)
+- `RESEMBRAR=2026-10-29` en `render.yaml` reemplaza `RESEMBRAR=si`. La fecha sembrada queda en la tabla `ajustes` (clave `sembrado_el`).
+- Regla: resiembra solo si hoy es la fecha de RESEMBRAR y lo sembrado no es de hoy. Comparar solo con la fecha guardada no sirve: o resiembra en cada arranque del día anterior o deja los datos del día anterior.
+- El truncate va fuera de la transacción (en MySQL la cerraría); la siembra y el marcador van dentro de `DB::transaction`.

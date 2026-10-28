@@ -27,6 +27,8 @@ services:
         value: es
       - key: LOG_CHANNEL
         value: stderr
+      - key: RESEMBRAR
+        value: "2026-10-29"   # día de la demo: resiembra una vez en el primer arranque de ese día
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_URL
