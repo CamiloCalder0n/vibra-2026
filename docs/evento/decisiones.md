@@ -30,3 +30,8 @@ tags: [evento, decisiones]
 ## 2026-10-27 22:21 · Esqueleto del backend (tarea 2)
 - Decisión: Laravel 13 + MySQL 8.4 con `php artisan serve` dentro de un solo `Dockerfile` (sirve para compose y para Render). Rutas API registradas a mano, sin `install:api`, para no instalar Sanctum (sin login).
 - Supuestos: zona horaria `America/Bogota`, idioma `es`. MySQL publicado en el puerto 3307 del computador. Laravel Boost no se instala (es un extra).
+
+## 2026-10-27 22:40 · Despliegue en Render (tarea 3, opción a)
+- Decisión: PostgreSQL 16 de Render en línea, MySQL 8.4 en local; solo Eloquent y migraciones, nada de SQL propio de un motor. Blueprint en `render.yaml` (raíz), región Oregon, plan gratis.
+- Consecuencia: cada despliegue corre `migrate --seed --force`, así que los seeders de la tarea 4 deben poder repetirse sin duplicar (`updateOrCreate` o revisar si ya hay datos).
+- Riesgos: el plan gratis duerme el servicio (abrir la URL 5 min antes) y la base gratis de Render vence a los 30 días (sirve para el reto).
