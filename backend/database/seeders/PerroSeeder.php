@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 class PerroSeeder extends Seeder
 {
     /**
-     * Los 35 perros del refugio (ficticios). Los 10 primeros son los de docs/diseno/contenido.md.
+     * Los 35 perros del refugio (ficticios). Los 10 primeros son los de docs/diseno/contenido.md. No se siembra a Lucero: es el perro que se registra en vivo en la demo.
      * Columnas: nombre, sexo, descripcion, edad_aprox, como_llego, vacunas, cuidados, llegó hace (días), estado.
      */
     private const PERROS = [
@@ -29,7 +29,7 @@ class PerroSeeder extends Seeder
         ['Pelusa', 'hembra', 'Hembra, pequeña blanca y peluda, 2 años', '2 años', 'bien', 'si', 'Cepillarla los sábados', 240, 'en_refugio'],
         ['Coco', 'macho', 'Macho, criollo café oscuro, 4 años', '4 años', 'flaco', 'si', null, 610, 'en_refugio'],
         ['Manchas', 'macho', 'Macho, blanco con manchas negras, 3 años', '3 años', 'bien', 'si', null, 430, 'en_refugio'],
-        ['Lucero', 'hembra', 'Hembra, criolla amarilla, 9 años', '9 años', 'enfermo', 'si', 'Es mayor: comida blanda', 1700, 'en_refugio'],
+        ['Duque', 'macho', 'Macho, criollo amarillo, 9 años', '9 años', 'enfermo', 'si', 'Es mayor: comida blanda', 1700, 'en_refugio'],
         ['Kira', 'hembra', 'Hembra, husky cruzada, 4 años', '4 años', 'bien', 'si', 'Se sale por debajo de la reja', 350, 'en_refugio'],
         ['Sasha', 'hembra', 'Hembra, mestiza gris, 6 años', '6 años', 'flaco', 'si', null, 980, 'en_refugio'],
         ['Rufo', 'macho', 'Macho, criollo peludo café, 8 años', '8 años', 'herido', 'si', 'Le duelen las caderas: que no salte', 1450, 'en_refugio'],

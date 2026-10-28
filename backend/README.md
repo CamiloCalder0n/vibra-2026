@@ -22,7 +22,7 @@ La primera vez, genere la llave: `docker compose exec app php artisan key:genera
 - API: http://localhost:8000/api/salud → `{"ok":true}`
 - MySQL desde el computador: `localhost:3307`, usuario `refugio`, clave `refugio_local`, base `refugio`.
 - Al arrancar se ejecuta `php artisan migrate --force` y luego `php artisan refugio:sembrar`, que siembra solo si la tabla `perros` está vacía (redesplegar no duplica).
-- Datos ficticios del refugio: 35 perros (Chispa adoptada), 3 tratamientos con sus dosis, 11 reportes de la semana, con fechas relativas al día en que se siembra. Casos de la demo: Rocco (cefalexina 8:00 a. m. pendiente), Nube (3 días comiendo poco, hoy decaída), Toby (no tolera machos), Bruno (llegó hace 2 días, vacunas "no se sabe").
+- Datos ficticios del refugio (historia de `docs/evento/flujos.md` sección 3): 35 perros (Chispa adoptada; Lucero no se siembra porque se registra en vivo), 3 tratamientos con 33 dosis, 9 reportes de la semana, con fechas relativas al día en que se siembra. Casos: Rocco (cefalexina cada 12 h, la de hoy a las 2:00 p. m. pendiente), Nube (2 días comiendo poco; el aviso nace al reportarla en vivo), Toby (no tolera machos), Bruno (llegó hace 2 días, vacunas "no se sabe"), Canela (tratamiento terminado ayer).
 - Resembrar con las fechas de hoy (borra solo los datos del refugio): `docker compose exec app php artisan refugio:sembrar --de-nuevo`. En Render: `RESEMBRAR=2026-10-29` (en `render.yaml`). Ese día, el primer arranque borra y siembra con las fechas de hoy y guarda `sembrado_el` en la tabla `ajustes`; los demás arranques de ese día y de otros días no tocan los datos.
 - Comandos de artisan: `docker compose exec app php artisan <comando>`.
 - Borrar la base y empezar de cero: `docker compose down -v`.
