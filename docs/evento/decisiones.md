@@ -77,3 +77,8 @@ tags: [evento, decisiones]
 - `GET /api/medicinas/hoy`: todas las dosis del día (dadas y por dar), con `perro_id` además de lo del contrato.
 - `POST /api/dosis/{id}/dar`: un solo `update ... whereNull('dada_en')`; 0 filas → 409 con la hora en que se dio y la próxima del mismo tratamiento. Se puede dar tarde (guarda la hora real); no se bloquea dar antes de la hora.
 - `POST /api/demo/reiniciar` (pedido por Camilo, fuera del contrato): llama a `refugio:sembrar --de-nuevo`. No tiene protección: cualquiera con la URL puede reiniciar los datos ficticios. Si molesta, se apaga con una variable.
+
+## 2026-10-28 09:35 · Arranque que no tumba el despliegue
+- Render falló: la siembra se quedó en "PerroSeeder RUNNING" 15 min y Render cortó por no ver el puerto. No se pudo reproducir en local (Postgres vacío, APP_ENV=production, sin stdin, 0,1 CPU y 512 MB: siembra en < 1 s). Causa sin confirmar.
+- Arreglo: el puerto se abre primero; migrar y sembrar van en segundo plano con `--no-interaction`, stdin cerrado y `timeout` (TIEMPO_MAXIMO_BASE, 180 s). Si fallan, queda `[arranque] ERROR` en el log y la API sigue arriba. `PGCONNECT_TIMEOUT=10` para que una base muda no cuelgue la conexión. `refugio:sembrar` anuncia cada paso para ubicar un cuelgue.
+- Corrección: `PHP_CLI_SERVER_WORKERS=4` no tenía efecto sin `--no-reload` (un solo proceso). La prueba de 12 toques de la tarea 6 corrió con un solo worker; repetida con 4 workers: 1×200 y 11×409.
