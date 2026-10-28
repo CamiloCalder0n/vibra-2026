@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePerroRequest;
 use App\Http\Resources\PerroResource;
 use App\Http\Resources\PerroResumenResource;
 use App\Models\Perro;
 use App\Services\EstadoDeHoy;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Validation\Rule;
@@ -34,6 +36,24 @@ class PerroController extends Controller
 
     public function show(Perro $perro): PerroResource
     {
+        return $this->ficha($perro);
+    }
+
+    public function store(StorePerroRequest $request): JsonResponse
+    {
+        $perro = Perro::create($request->validated());
+
+        return $this->fichaConMensaje($perro, "Bienvenido, {$perro->nombre}. Ya está en Mis perros.", 201);
+    }
+
+    private function ficha(Perro $perro): PerroResource
+    {
         return new PerroResource($perro->load(['reportesRecientes', 'dosisDeHoy.tratamiento', 'registroVacunas', 'tratamientos']));
+    }
+
+    // La ficha y un mensaje para la pantalla. No se usa additional(): Laravel volvería a envolver todo en "data".
+    private function fichaConMensaje(Perro $perro, string $mensaje, int $codigo): JsonResponse
+    {
+        return response()->json([...$this->ficha($perro)->resolve(), 'mensaje' => $mensaje], $codigo);
     }
 }
