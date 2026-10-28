@@ -96,3 +96,8 @@ tags: [evento, decisiones]
 - Falta `GET /api/veterinario/resumen` (se hace en backend; mientras, el frontend usa mock).
 - Riesgo de la mentoría de hoy: antes de las 2:00 p. m. Rocco no sale en Hoy (2 necesitan, 32 bien). La mentoría es a las 2:20 p. m.: sale bien.
 - Jueves: `RESEMBRAR` "2026-10-29" en render.yaml + push + Manual Deploy, y `POST /api/demo/reiniciar` a las 2:50 p. m.
+
+## 2026-10-28 10:05 · Resumen del veterinario, límite del reinicio e ids fijos
+- `GET /api/veterinario/resumen`: además de revisar, tratamientos y recien_llegados devuelve `desde` y `hasta` (para el título "Del … al …"). alerta = 3 días seguidos con reporte dentro del rango. Dosis dadas/total contadas dentro del rango.
+- `/api/demo/reiniciar` con `throttle:3,1`; el 429 responde en español con el formato de errores.
+- Toda siembra empieza con truncate (antes solo al resembrar). En Render los intentos colgados gastaron ids y Rocco quedó con id 4; se corrige con un reinicio de la demo después del despliegue.
