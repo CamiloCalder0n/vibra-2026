@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\FechasDeBogota;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Model;
@@ -12,6 +13,8 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 #[Fillable(['nombre', 'sexo', 'descripcion', 'edad_aprox', 'foto_url', 'como_llego', 'vacunas', 'cuidados', 'llego_el', 'estado'])]
 class Perro extends Model
 {
+    use FechasDeBogota;
+
     public const SEXOS = ['macho', 'hembra', 'no_se'];
 
     public const COMO_LLEGO = ['bien', 'flaco', 'herido', 'enfermo'];
@@ -25,7 +28,7 @@ class Perro extends Model
     protected function casts(): array
     {
         return [
-            'llego_el' => 'date',
+            'llego_el' => 'date:Y-m-d',
         ];
     }
 

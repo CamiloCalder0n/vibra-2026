@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\FechasDeBogota;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Model;
@@ -11,6 +12,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 #[Fillable(['perro_id', 'sintomas', 'nota_voz_url', 'creado_en'])]
 class Reporte extends Model
 {
+    use FechasDeBogota;
+
     public const SINTOMAS = ['no_comio', 'comio_poco', 'decaido', 'vomito', 'diarrea', 'cojea', 'tose', 'herida'];
 
     // El contrato usa creado_en y no hay fecha de cambio: un reporte se borra, no se edita.

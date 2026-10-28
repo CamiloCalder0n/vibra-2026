@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\FechasDeBogota;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Model;
@@ -11,6 +12,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 #[Fillable(['tratamiento_id', 'programada_para', 'dada_en'])]
 class Dosis extends Model
 {
+    use FechasDeBogota;
+
     protected function casts(): array
     {
         return [

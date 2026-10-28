@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\FechasDeBogota;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Model;
@@ -11,12 +12,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 #[Fillable(['perro_id', 'nombre', 'aplicada_el'])]
 class Vacuna extends Model
 {
+    use FechasDeBogota;
+
     public const NOMBRES = ['moquillo', 'parvovirus', 'rabia'];
 
     protected function casts(): array
     {
         return [
-            'aplicada_el' => 'date',
+            'aplicada_el' => 'date:Y-m-d',
         ];
     }
 

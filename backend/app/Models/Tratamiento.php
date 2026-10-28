@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\FechasDeBogota;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Model;
@@ -12,12 +13,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 #[Fillable(['perro_id', 'medicamento', 'dosis', 'horas', 'desde', 'hasta'])]
 class Tratamiento extends Model
 {
+    use FechasDeBogota;
+
     protected function casts(): array
     {
         return [
             'horas' => 'array',
-            'desde' => 'date',
-            'hasta' => 'date',
+            'desde' => 'date:Y-m-d',
+            'hasta' => 'date:Y-m-d',
         ];
     }
 
