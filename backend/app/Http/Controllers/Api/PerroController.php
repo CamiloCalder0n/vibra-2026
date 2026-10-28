@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PerroResource;
 use App\Http\Resources\PerroResumenResource;
 use App\Models\Perro;
 use App\Services\EstadoDeHoy;
@@ -29,5 +30,10 @@ class PerroController extends Controller
         }
 
         return PerroResumenResource::collection($perros->values());
+    }
+
+    public function show(Perro $perro): PerroResource
+    {
+        return new PerroResource($perro->load(['reportesRecientes', 'dosisDeHoy.tratamiento', 'registroVacunas', 'tratamientos']));
     }
 }
