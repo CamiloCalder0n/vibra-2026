@@ -35,6 +35,7 @@ return Application::configure(basePath: dirname(__DIR__))
             $mensaje = match ($codigo) {
                 404 => 'No encontramos lo que busca.',
                 405 => 'Esa acción no está permitida aquí.',
+                429 => 'Demasiados intentos seguidos. Espere un minuto y vuelva a intentar.',
                 500 => 'Algo falló. Intente de nuevo.',
                 default => $e->getMessage() ?: 'Algo falló. Intente de nuevo.',
             };

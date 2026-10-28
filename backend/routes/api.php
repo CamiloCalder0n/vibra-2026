@@ -22,4 +22,5 @@ Route::post('/dosis/{dosis}/dar', [DosisController::class, 'dar']);
 
 Route::get('/veterinario/resumen', [VeterinarioController::class, 'resumen']);
 
-Route::post('/demo/reiniciar', [DemoController::class, 'reiniciar']);
+// Máximo 3 por minuto: el botón no se puede tocar en ráfaga ni usar para tumbar la base.
+Route::post('/demo/reiniciar', [DemoController::class, 'reiniciar'])->middleware('throttle:3,1');

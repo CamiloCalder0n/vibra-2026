@@ -176,6 +176,20 @@ class HistoriaDemoTest extends TestCase
             ->assertJsonPath('errores.hasta.0', 'La fecha hasta no puede ser antes de la fecha desde.');
     }
 
+    public function test_reiniciar_la_demo_tiene_limite_de_3_por_minuto(): void
+    {
+        foreach (range(1, 3) as $vez) {
+            $this->postJson('/api/demo/reiniciar')->assertOk();
+        }
+
+        $this->postJson('/api/demo/reiniciar')
+            ->assertTooManyRequests()
+            ->assertJsonPath('mensaje', 'Demasiados intentos seguidos. Espere un minuto y vuelva a intentar.');
+
+        $this->travel(61)->seconds();
+        $this->postJson('/api/demo/reiniciar')->assertOk();
+    }
+
     public function test_errores_con_el_formato_del_contrato(): void
     {
         $this->postJson('/api/perros', ['nombre' => ''])->assertUnprocessable()->assertJsonStructure(['mensaje', 'errores' => ['nombre', 'sexo', 'como_llego', 'vacunas']]);
