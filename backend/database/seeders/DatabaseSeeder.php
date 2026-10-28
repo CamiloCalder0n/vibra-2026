@@ -14,6 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Tarea 4: perros, tratamientos, dosis, reportes y vacunas del refugio.
+        // La semana anterior del Refugio Yesenia, con fechas relativas a hoy (ficticio).
+        $this->call([
+            PerroSeeder::class,
+            TratamientoSeeder::class,
+            ReporteSeeder::class,
+        ]);
     }
 }
