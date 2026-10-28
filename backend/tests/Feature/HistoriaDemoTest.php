@@ -94,6 +94,61 @@ class HistoriaDemoTest extends TestCase
         $this->getJson('/api/hoy')->assertJsonPath('en_refugio', 34)->assertJsonPath('bien', 31);
     }
 
+    public function test_medicinas_de_hoy(): void
+    {
+        $this->getJson('/api/medicinas/hoy')
+            ->assertOk()
+            ->assertJsonCount(2)
+            ->assertJsonPath('0.hora', '02:00')
+            ->assertJsonPath('0.dada_en', '2026-10-29T02:04:00-05:00')
+            ->assertJsonPath('1', [
+                'dosis_id' => 7, 'perro_id' => 1, 'perro' => 'Rocco', 'medicamento' => 'Cefalexina',
+                'dosis' => '1 pastilla', 'hora' => '14:00', 'dada_en' => null,
+            ]);
+    }
+
+    public function test_rocco_dar_la_cefalexina_y_el_bloqueo_de_la_doble_dosis(): void
+    {
+        $this->travelTo(Carbon::parse('2026-10-29 15:05', 'America/Bogota'));
+
+        $this->postJson('/api/dosis/7/dar')
+            ->assertOk()
+            ->assertExactJson(['dada_en' => '2026-10-29T15:05:00-05:00', 'mensaje' => 'Dada a las 3:05 p. m.']);
+
+        $this->postJson('/api/dosis/7/dar')
+            ->assertStatus(409)
+            ->assertExactJson([
+                'mensaje' => 'Rocco ya se tomó la cefalexina a las 3:05 p. m. La próxima es a las 2:00 a. m.',
+                'errores' => ['dosis' => ['ya_dada']],
+            ]);
+
+        $this->getJson('/api/medicinas/hoy')->assertJsonPath('1.dada_en', '2026-10-29T15:05:00-05:00');
+        $this->getJson('/api/hoy')
+            ->assertJsonPath('necesitan.*.nombre', ['Nube', 'Bruno'])
+            ->assertJsonPath('medicinas_pendientes', [])
+            ->assertJsonPath('bien', 32);
+
+        $this->postJson('/api/dosis/999/dar')->assertNotFound();
+    }
+
+    public function test_reiniciar_la_demo_deja_todo_como_al_comienzo(): void
+    {
+        $this->postJson('/api/perros/2/reportes', ['sintomas' => ['decaido']])->assertCreated();
+        $this->postJson('/api/dosis/7/dar')->assertOk();
+        $this->postJson('/api/perros', ['nombre' => 'Lucero', 'sexo' => 'hembra', 'como_llego' => 'flaco', 'vacunas' => 'no_se'])->assertCreated();
+
+        $this->postJson('/api/demo/reiniciar')
+            ->assertOk()
+            ->assertExactJson(['mensaje' => 'Listo, la demo volvió al comienzo.', 'sembrado_el' => '2026-10-29']);
+
+        $this->getJson('/api/hoy')
+            ->assertJsonPath('necesitan.*.nombre', ['Nube', 'Rocco', 'Bruno'])
+            ->assertJsonPath('necesitan.0.alerta', false)
+            ->assertJsonPath('medicinas_pendientes.0.dosis_id', 7)
+            ->assertJsonPath('en_refugio', 34)
+            ->assertJsonPath('bien', 31);
+    }
+
     public function test_errores_con_el_formato_del_contrato(): void
     {
         $this->postJson('/api/perros', ['nombre' => ''])->assertUnprocessable()->assertJsonStructure(['mensaje', 'errores' => ['nombre', 'sexo', 'como_llego', 'vacunas']]);
